@@ -1,0 +1,139 @@
+{
+  "artists": [
+    {
+      "id": 1,
+      "name": "Jack Holliday",
+      "managerId": 1,
+      "genreId": 2,
+      "isBand": false
+    },
+    {
+      "id": 3,
+      "name": "Kadi Beth",
+      "managerId": 1,
+      "genreId": 6,
+      "isBand": false
+    }
+  ],
+  "openMics": [
+    {
+      "id": 1,
+      "eventTitle": "Artist Night",
+      "venueId": 4,
+      "managerId": 1,
+      "isRecurring": true,
+      "dateTime": null,
+      "recurrence": "Weekly",
+      "time": "19:30",
+      "dayOfWeek": "Monday",
+      "dayOfMonth": null
+    }
+  ],
+  "genres": [
+    {
+      "id": 1,
+      "name": "Country"
+    },
+    {
+      "id": 2,
+      "name": "Soul"
+    },
+    {
+      "id": 3,
+      "name": "R&B"
+    },
+    {
+      "id": 4,
+      "name": "Rock"
+    },
+    {
+      "id": 5,
+      "name": "Pop"
+    },
+    {
+      "id": 6,
+      "name": "Singer Songwriter"
+    },
+    {
+      "id": 7,
+      "name": "Folk"
+    },
+    {
+      "id": 8,
+      "name": "Rap"
+    }
+  ],
+  "managers": [
+    {
+      "id": 1,
+      "name": "John Gardner",
+      "email": "jtgardner99@gmail.com"
+    },
+    {
+      "id": 2,
+      "name": "John Smith",
+      "email": "johnsmith@gmail.com"
+    },
+    {
+      "name": "Jack Gardner",
+      "email": "jackhollidaylive@gmail.com",
+      "id": 3
+    }
+  ],
+  "artistShows": [
+    {
+      "artistId": "1",
+      "venueId": 2,
+      "eventTitle": "Jack Holliday Trio",
+      "date": "2026-04-04",
+      "startTime": "19:30",
+      "endTime": "22:00",
+      "intimate": false,
+      "url": "https://mail.google.com/mail/u/1/#inbox",
+      "id": 4
+    },
+    {
+      "artistId": "1",
+      "venueId": 2,
+      "eventTitle": "Jack Holliday and Kadi Beth",
+      "date": "2026-04-10",
+      "startTime": "18:00",
+      "endTime": "21:00",
+      "intimate": false,
+      "url": "https://mail.google.com/mail/u/1/#inbox/FMfcgzQgLFfdrPnwkBHPsWCGfBwJWmpk",
+      "id": 5
+    }
+  ],
+  "venues": [
+    {
+      "id": 1,
+      "venueName": "Brooklyn Bowl - Nashville",
+      "lat": 36.1732514,
+      "lng": -86.7836597
+    },
+    {
+      "id": 2,
+      "venueName": "East Room - Nashville",
+      "lat": 36.19443,
+      "lng": -86.74294
+    },
+    {
+      "id": 3,
+      "venueName": "Exit-In - Nashville",
+      "lat": 36.15133,
+      "lng": -86.80433
+    },
+    {
+      "id": 4,
+      "venueName": "Vinyl Lounge - Nashville",
+      "lat": 36.14137,
+      "lng": -86.76283
+    },
+    {
+      "id": 5,
+      "venueName": "Skinny Dennis - Nashville",
+      "lat": 36.19687,
+      "lng": -86.74236
+    }
+  ]
+}
