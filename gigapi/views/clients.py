@@ -3,10 +3,12 @@ from rest_framework.response import Response
 from rest_framework import serializers
 from gigapi.models import Client
 from .artists import ArtistSerializer, Artist
+from .genres import GenreSerializer, Genre
 
 class ClientSerializer(serializers.ModelSerializer):
     is_owner = serializers.SerializerMethodField()
     artists = ArtistSerializer(many=True)
+    genre = GenreSerializer()
 
     def get_is_owner(self, obj):
         # Check if the authenticated user is the owner
@@ -14,14 +16,14 @@ class ClientSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Client
-        fields = ['id', 'user', 'client_name', 'is_band', 'genre_id', 'is_owner', 'artists']
+        fields = ['id', 'user', 'client_name', 'is_band', 'genre', 'is_owner', 'artists']
 
 class ClientWriteSerializer(serializers.ModelSerializer):
     artists = serializers.ListField(child=serializers.PrimaryKeyRelatedField(queryset=Artist.objects.all()), required=False)
 
     class Meta:
         model = Client
-        fields = ['client_name', 'user', 'is_band', 'genre_id', 'is_owner', 'artists']
+        fields = ['client_name', 'user', 'is_band', 'genre', 'is_owner', 'artists']
 
 
 class ClientViewSet(viewsets.ViewSet):
