@@ -45,6 +45,7 @@ Table Clients {
     client_name varchar
     isBand boolean
     genre_id int [ref: > Genres.id]
+    client_image image
 }
 
 Table Artists {

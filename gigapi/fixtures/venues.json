@@ -1,0 +1,142 @@
+[
+    {
+        "model": "gigapi.venue",
+        "pk": 1,
+        "fields": {
+            "name": "Ryman Auditorium",
+            "lat": 36.161483,
+            "lng": -86.778000,
+            "noise_level": "high",
+            "parking": false,
+            "bar": true,
+            "food": false,
+            "kid_friendly": true
+        }
+    },
+    {
+        "model": "gigapi.venue",
+        "pk": 2,
+        "fields": {
+            "name": "Exit/In",
+            "lat": 36.149860,
+            "lng": -86.799730,
+            "noise_level": "high",
+            "parking": false,
+            "bar": true,
+            "food": false,
+            "kid_friendly": false
+        }
+    },
+    {
+        "model": "gigapi.venue",
+        "pk": 3,
+        "fields": {
+            "name": "The Bluebird Cafe",
+            "lat": 36.099270,
+            "lng": -86.831600,
+            "noise_level": "low",
+            "parking": true,
+            "bar": true,
+            "food": true,
+            "kid_friendly": true
+        }
+    },
+    {
+        "model": "gigapi.venue",
+        "pk": 4,
+        "fields": {
+            "name": "Bridgestone Arena",
+            "lat": 36.159180,
+            "lng": -86.778610,
+            "noise_level": "high",
+            "parking": true,
+            "bar": true,
+            "food": true,
+            "kid_friendly": true
+        }
+    },
+    {
+        "model": "gigapi.venue",
+        "pk": 5,
+        "fields": {
+            "name": "Station Inn",
+            "lat": 36.155280,
+            "lng": -86.789940,
+            "noise_level": "medium",
+            "parking": false,
+            "bar": true,
+            "food": false,
+            "kid_friendly": false
+        }
+    },
+    {
+        "model": "gigapi.venue",
+        "pk": 6,
+        "fields": {
+            "name": "Marathon Music Works",
+            "lat": 36.154430,
+            "lng": -86.800570,
+            "noise_level": "high",
+            "parking": true,
+            "bar": true,
+            "food": false,
+            "kid_friendly": false
+        }
+    },
+    {
+        "model": "gigapi.venue",
+        "pk": 7,
+        "fields": {
+            "name": "The Basement",
+            "lat": 36.132570,
+            "lng": -86.771780,
+            "noise_level": "medium",
+            "parking": false,
+            "bar": true,
+            "food": false,
+            "kid_friendly": false
+        }
+    },
+    {
+        "model": "gigapi.venue",
+        "pk": 8,
+        "fields": {
+            "name": "Ascend Amphitheater",
+            "lat": 36.162870,
+            "lng": -86.773140,
+            "noise_level": "high",
+            "parking": true,
+            "bar": true,
+            "food": true,
+            "kid_friendly": true
+        }
+    },
+    {
+        "model": "gigapi.venue",
+        "pk": 9,
+        "fields": {
+            "name": "The Listening Room Cafe",
+            "lat": 36.156020,
+            "lng": -86.782450,
+            "noise_level": "low",
+            "parking": false,
+            "bar": true,
+            "food": true,
+            "kid_friendly": true
+        }
+    },
+    {
+        "model": "gigapi.venue",
+        "pk": 10,
+        "fields": {
+            "name": "Third Man Records",
+            "lat": 36.154990,
+            "lng": -86.796560,
+            "noise_level": "medium",
+            "parking": false,
+            "bar": false,
+            "food": false,
+            "kid_friendly": true
+        }
+    }
+]

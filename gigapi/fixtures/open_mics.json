@@ -1,0 +1,22 @@
+[
+    {"model": "gigapi.open_mic", "pk": 1, "fields": {
+        "event_title": "Artist Night",
+        "user_id": 1,
+        "recurrence": true,
+        "weekly_recurrence": "Mondays",
+        "monthly_recurrence": null,
+        "start_time": "",
+        "end_time": "",
+        "event_image": ""
+        }},
+    {"model": "gigapi.open_mic", "pk": 2, "fields": {
+        "event_title": "Pitch Meeting",
+        "user_id": 1,
+        "recurrence": true,
+        "weekly_recurrence": "Tuesdays",
+        "monthly_recurrence": null,
+        "start_time": "",
+        "end_time": "",
+        "event_image": ""
+        }}
+]
