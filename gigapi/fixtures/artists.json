@@ -1,0 +1,22 @@
+[
+    {"model": "gigapi.artist", "pk": 1, "fields": {"name": "Taylor Swift"}},
+    {"model": "gigapi.artist", "pk": 2, "fields": {"name": "Ed Sheeran"}},
+    {"model": "gigapi.artist", "pk": 3, "fields": {"name": "Aretha Franklin"}},
+    {"model": "gigapi.artist", "pk": 4, "fields": {"name": "David Bowie"}},
+    {"model": "gigapi.artist", "pk": 5, "fields": {"name": "Janis Joplin"}},
+    {"model": "gigapi.artist", "pk": 6, "fields": {"name": "Prince"}},
+    {"model": "gigapi.artist", "pk": 7, "fields": {"name": "Johnny Cash"}},
+    {"model": "gigapi.artist", "pk": 8, "fields": {"name": "Sabrina Carpenter"}},
+    {"model": "gigapi.artist", "pk": 9, "fields": {"name": "Led Zeppelin"}},
+    {"model": "gigapi.artist", "pk": 10, "fields": {"name": "Chris Stapleton"}},
+    {"model": "gigapi.artist", "pk": 11, "fields": {"name": "Luke Combs"}},
+    {"model": "gigapi.artist", "pk": 12, "fields": {"name": "Bruno Mars"}},
+    {"model": "gigapi.artist", "pk": 13, "fields": {"name": "Lady Gaga"}},
+    {"model": "gigapi.artist", "pk": 14, "fields": {"name": "Cold Play"}},
+    {"model": "gigapi.artist", "pk": 15, "fields": {"name": "Billie Eilish"}},
+    {"model": "gigapi.artist", "pk": 16, "fields": {"name": "Shakira"}},
+    {"model": "gigapi.artist", "pk": 17, "fields": {"name": "Harry Styles"}},
+    {"model": "gigapi.artist", "pk": 18, "fields": {"name": "Jelly Roll"}},
+    {"model": "gigapi.artist", "pk": 19, "fields": {"name": "Lainey Wilson"}},
+    {"model": "gigapi.artist", "pk": 20, "fields": {"name": "Megan Moroney"}}
+]

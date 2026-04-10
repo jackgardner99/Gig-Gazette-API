@@ -1,0 +1,15 @@
+from django.db import models
+
+
+class Venue(models.Model):
+    name = models.CharField(max_length=255)
+    lat = models.DecimalField(max_digits=9, decimal_places=6)
+    lng = models.DecimalField(max_digits=9, decimal_places=6)
+    noise_level = models.CharField(max_length=255, blank=True, null=True)
+    parking = models.BooleanField(default=False)
+    bar = models.BooleanField(default=False)
+    food = models.BooleanField(default=False)
+    kid_friendly = models.BooleanField(default=False)
+
+    class Meta:
+        db_table = "venues"

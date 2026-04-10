@@ -1,0 +1,75 @@
+Table Users {
+    id int [pk]
+    first_name varchar
+    last_name varchar
+    email varchar
+    password varchar
+}
+
+Table Venues {
+    id int [pk]
+    name varchar
+    lat coordinate
+    lng coordinate
+    noise_level varchar
+    parking boolean
+    bar boolean
+    food boolean
+    kid_friendly boolean
+}
+
+Table Shows {
+    id int [pk]
+    event_title varchar
+    client_id int [ref: > Clients.id]
+    poster_img image
+    date date
+    start_time time
+    end_time time
+}
+
+Table OpenMics {
+    id int [pk]
+    event_title varchar
+    user_id int [ref: > Users.id]
+    recurrence boolean
+    weekly_recurrence varchar
+    monthly_recurrence varchar
+    start_time time
+    end_time time
+    event_image image
+}
+
+Table Clients {
+    id int [pk]
+    client_name varchar
+    isBand boolean
+    genre_id int [ref: > Genres.id]
+}
+
+Table Artists {
+    id int [pk]
+    name varchar
+}
+
+Table ClientArtist {
+    id int [pk]
+    client_id int [ref: > Clients.id]
+    artist_id int [ref: > Artists.id]
+}
+
+Table Genres {
+    id int [pk]
+    name varchar
+}
+
+Table Restaurants {
+    id int [pk]
+    venue_id int [ref: > Venues.id]
+    name varchar
+    food_type varchar
+    lat coordinate
+    lng coordinate
+    is_visible boolean
+}
+
