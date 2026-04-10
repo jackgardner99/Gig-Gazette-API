@@ -1,22 +1,22 @@
 [
-    {"model": "gigapi.open_mic", "pk": 1, "fields": {
+    {"model": "gigapi.openmic", "pk": 1, "fields": {
         "event_title": "Artist Night",
-        "user_id": 1,
+        "user": 1,
         "recurrence": true,
         "weekly_recurrence": "Mondays",
         "monthly_recurrence": null,
-        "start_time": "",
-        "end_time": "",
+        "start_time": "19:00:00",
+        "end_time": "22:00:00",
         "event_image": ""
-        }},
-    {"model": "gigapi.open_mic", "pk": 2, "fields": {
+    }},
+    {"model": "gigapi.openmic", "pk": 2, "fields": {
         "event_title": "Pitch Meeting",
-        "user_id": 1,
+        "user": 1,
         "recurrence": true,
         "weekly_recurrence": "Tuesdays",
         "monthly_recurrence": null,
-        "start_time": "",
-        "end_time": "",
+        "start_time": "18:00:00",
+        "end_time": "21:00:00",
         "event_image": ""
-        }}
+    }}
 ]

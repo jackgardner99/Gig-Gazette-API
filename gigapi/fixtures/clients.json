@@ -1,6 +1,6 @@
 [
-    {"model": "gigapi.client", "pk": 1, "fields": {"client_name": "Jack Holliday", "is_band": false, "genre_id": 3, "client_image": ""}},
-    {"model": "gigapi.client", "pk": 2, "fields": {"client_name": "Kadi Beth", "is_band": false, "genre_id": 5, "client_image": ""}},
-    {"model": "gigapi.client", "pk": 3, "fields": {"client_name": "The Blue House Band", "is_band": true, "genre_id": 3, "client_image": ""}},
-    {"model": "gigapi.client", "pk": 4, "fields": {"client_name": "Downriver Collective", "is_band": true, "genre_id": 2, "client_image": ""}}
+    {"model": "gigapi.client", "pk": 1, "fields": {"client_name": "Jack Holliday", "is_band": false, "genre": 3, "artists": [10, 17]}},
+    {"model": "gigapi.client", "pk": 2, "fields": {"client_name": "Kadi Beth", "is_band": false, "genre": 5, "artists": [9, 19]}},
+    {"model": "gigapi.client", "pk": 3, "fields": {"client_name": "The Blue House Band", "is_band": true, "genre": 3, "artists": [9]}},
+    {"model": "gigapi.client", "pk": 4, "fields": {"client_name": "Downriver Collective", "is_band": true, "genre": 2, "artists": [7, 20]}}
 ]

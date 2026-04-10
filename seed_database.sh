@@ -7,4 +7,8 @@ python3 manage.py makemigrations gigapi
 python3 manage.py migrate gigapi
 python3 manage.py loaddata users
 python3 manage.py loaddata tokens
+python3 manage.py loaddata genres
 python3 manage.py loaddata artists
+python3 manage.py loaddata clients
+python3 manage.py loaddata venues
+python3 manage.py loaddata open_mics
