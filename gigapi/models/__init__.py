@@ -1,4 +1,3 @@
-from .user import User
 from .genre import Genre
 from .venue import Venue
 from .artist import Artist
