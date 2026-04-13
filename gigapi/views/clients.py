@@ -47,11 +47,16 @@ class ClientViewSet(viewsets.ViewSet):
         is_band = request.data.get('is_band')
         genre_id = request.data.get('genre_id')
 
+        try:
+            genre = Genre.objects.get(pk=genre_id)
+        except Genre.DoesNotExist:
+            return Response({'error': 'Genre not found'}, status=status.HTTP_400_BAD_REQUEST)
+
         client = Client.objects.create(
             user=request.user,
             client_name=client_name,
             is_band=is_band,
-            genre_id=genre_id
+            genre=genre
         )
 
         # Establish the many-to-many relationships
