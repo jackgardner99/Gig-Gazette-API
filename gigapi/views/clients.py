@@ -75,9 +75,15 @@ class ClientViewSet(viewsets.ViewSet):
 
             serializer = ClientWriteSerializer(data=request.data)
             if serializer.is_valid():
+                genre_id = request.data.get('genre_id')
+                try:
+                    genre = Genre.objects.get(pk=genre_id)
+                except Genre.DoesNotExist:
+                    return Response({'error': 'Genre not found'}, status=status.HTTP_400_BAD_REQUEST)
+
                 client.client_name = serializer.validated_data['client_name']
                 client.is_band = serializer.validated_data['is_band']
-                client.genre_id = serializer.validated_data['genre_id']
+                client.genre = genre
                 client.save()
 
                 artist_ids = request.data.get('artists', [])
