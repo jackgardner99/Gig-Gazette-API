@@ -11,8 +11,10 @@ class ClientSerializer(serializers.ModelSerializer):
     genre = GenreSerializer()
 
     def get_is_owner(self, obj):
-        # Check if the authenticated user is the owner
-        return self.context['request'].user == obj.user
+        request = self.context['request']
+        if not request.user.is_authenticated:
+            return False
+        return request.user == obj.user
     
     class Meta:
         model = Client
