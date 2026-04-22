@@ -1,5 +1,6 @@
 from django.db import models
 from .client import Client
+from .venue import Venue
 
 
 class Show(models.Model):
@@ -9,6 +10,7 @@ class Show(models.Model):
     date = models.DateField()
     start_time = models.TimeField()
     end_time = models.TimeField()
+    venue = models.ForeignKey(Venue, on_delete=models.CASCADE, related_name="shows")
 
     class Meta:
         db_table = "shows"

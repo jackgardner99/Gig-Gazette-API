@@ -3,25 +3,29 @@ from rest_framework.response import Response
 from rest_framework import serializers
 from gigapi.models import Show
 from .clients import Client, ClientSerializer
+from .venues import Venue, VenueSerializer
 
 class ShowSerializer(serializers.ModelSerializer):
     is_owner = serializers.SerializerMethodField()
     client = ClientSerializer()
+    venue = VenueSerializer()
 
     def get_is_owner(self, obj):
-        # Check if the authenticated user is the owner
-        return self.context['request'].user == obj.user
+        request = self.context['request']
+        if not request.user.is_authenticated:
+            return False
+        return request.user == obj.client.user
     
     class Meta:
         model = Show
-        fields = ['id', 'client', 'is_owner', 'event_title', 'poster_img', 'date', 'start_time', 'end_time']
+        fields = ['id', 'client', 'is_owner', 'event_title', 'poster_img', 'date', 'start_time', 'end_time', 'venue']
 
 class ShowWriteSerializer(serializers.ModelSerializer):
     client = serializers.ListField(child=serializers.PrimaryKeyRelatedField(queryset=Client.objects.all()), required=False)
 
     class Meta:
         model = Show
-        fields = ['client', 'event_title', 'poster_img', 'date', 'start_time', 'end_time']
+        fields = ['client', 'event_title', 'poster_img', 'date', 'start_time', 'end_time', 'venue']
 
 
 class ShowViewSet(viewsets.ViewSet):

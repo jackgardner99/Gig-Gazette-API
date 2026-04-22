@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from .venue import Venue
 
 
 class OpenMic(models.Model):
@@ -11,6 +12,7 @@ class OpenMic(models.Model):
     start_time = models.TimeField()
     end_time = models.TimeField()
     event_image = models.ImageField(upload_to="open_mics/", blank=True, null=True)
+    venue = models.ForeignKey(Venue, on_delete=models.CASCADE, related_name="open_mics")
 
     class Meta:
         db_table = "open_mics"

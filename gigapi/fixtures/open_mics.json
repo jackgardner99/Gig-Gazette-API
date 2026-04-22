@@ -7,7 +7,8 @@
         "monthly_recurrence": null,
         "start_time": "19:00:00",
         "end_time": "22:00:00",
-        "event_image": ""
+        "event_image": "",
+        "venue": 2
     }},
     {"model": "gigapi.openmic", "pk": 2, "fields": {
         "event_title": "Pitch Meeting",
@@ -17,6 +18,7 @@
         "monthly_recurrence": null,
         "start_time": "18:00:00",
         "end_time": "21:00:00",
-        "event_image": ""
+        "event_image": "",
+        "venue": 5
     }}
 ]
