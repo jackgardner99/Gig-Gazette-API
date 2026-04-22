@@ -12,3 +12,4 @@ python3 manage.py loaddata artists
 python3 manage.py loaddata clients
 python3 manage.py loaddata venues
 python3 manage.py loaddata open_mics
+python3 manage.py loaddata restaurants
