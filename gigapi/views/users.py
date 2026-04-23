@@ -3,6 +3,8 @@ from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers
 from rest_framework import status
+from rest_framework.authtoken.models import Token
+from rest_framework.permissions import AllowAny
 from django.contrib.auth.models import User
 
 
@@ -22,6 +24,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class Users(ViewSet):
+    permission_classes = [AllowAny]
     """Users for Gig Gazette
     Purpose: Allow a user to communicate with the Gig Gazette database to GET PUT POST and DELETE Users.
     Methods: GET PUT(id) POST
@@ -43,6 +46,27 @@ class Users(ViewSet):
             return HttpResponseServerError(ex)
 
 
+
+    def create(self, request):
+        username = request.data.get('username')
+        email = request.data.get('email')
+        password = request.data.get('password')
+        first_name = request.data.get('first_name', '')
+        last_name = request.data.get('last_name', '')
+
+        if User.objects.filter(username=username).exists():
+            return Response({'error': 'Username already taken'}, status=status.HTTP_400_BAD_REQUEST)
+
+        user = User.objects.create_user(
+            username=username,
+            email=email,
+            password=password,
+            first_name=first_name,
+            last_name=last_name
+        )
+
+        token = Token.objects.create(user=user)
+        return Response({'token': token.key}, status=status.HTTP_201_CREATED)
 
     def list(self, request):
         """Handle GET requests to user resource"""
