@@ -21,11 +21,9 @@ class ClientSerializer(serializers.ModelSerializer):
         fields = ['id', 'user', 'client_name', 'is_band', 'genre', 'is_owner', 'artists']
 
 class ClientWriteSerializer(serializers.ModelSerializer):
-    artists = serializers.ListField(child=serializers.PrimaryKeyRelatedField(queryset=Artist.objects.all()), required=False)
-
     class Meta:
         model = Client
-        fields = ['client_name', 'user', 'is_band', 'genre', 'is_owner', 'artists']
+        fields = ['client_name', 'is_band']
 
 
 class ClientViewSet(viewsets.ViewSet):
@@ -77,7 +75,7 @@ class ClientViewSet(viewsets.ViewSet):
 
             serializer = ClientWriteSerializer(data=request.data)
             if serializer.is_valid():
-                genre_id = request.data.get('genre_id')
+                genre_id = request.data.get('genre_id') or request.data.get('genre')
                 try:
                     genre = Genre.objects.get(pk=genre_id)
                 except Genre.DoesNotExist:
