@@ -10,6 +10,7 @@ class Venue(models.Model):
     bar = models.BooleanField(default=False)
     food = models.BooleanField(default=False)
     kid_friendly = models.BooleanField(default=False)
+    venue_image = models.ImageField(upload_to="venues/", blank=True, null=True)
 
     class Meta:
         db_table = "venues"
