@@ -11,6 +11,7 @@ djangorestframework = "*"
 django-cors-headers = "*"
 pylint-django = "*"
 pillow = "*"
+requests = "*"
 
 [dev-packages]
 
