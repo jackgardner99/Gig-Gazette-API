@@ -101,9 +101,13 @@ class ShowViewSet(viewsets.ViewSet):
     def destroy(self, request, pk=None):
         try:
             show = Show.objects.get(pk=pk)
-            self.check_object_permissions(request, show)
-            show.delete()
+            if show.client.user.id == request.auth.user.id:
 
-            return Response(status=status.HTTP_204_NO_CONTENT)
+                self.check_object_permissions(request, show)
+                show.delete()
+
+                return Response(status=status.HTTP_204_NO_CONTENT)
+            else:
+                return Response({'message': "You do not own this show"}, status=status.HTTP_403_FORBIDDEN)
         except Show.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)

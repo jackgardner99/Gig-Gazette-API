@@ -49,7 +49,7 @@ class OpenMicViewSet(viewsets.ViewSet):
         start_time = request.data.get('start_time')
         end_time = request.data.get('end_time')
         event_image = request.data.get('event_image')
-        venue_id = request.data.get('venue_id')
+        venue_id = request.data.get('venue')
 
         try:
             venue = Venue.objects.get(pk=venue_id)
@@ -107,9 +107,13 @@ class OpenMicViewSet(viewsets.ViewSet):
     def destroy(self, request, pk=None):
         try:
             open_mic = OpenMic.objects.get(pk=pk)
-            self.check_object_permissions(request, open_mic)
-            open_mic.delete()
+            if open_mic.user.id == request.auth.user.id:
 
-            return Response(status=status.HTTP_204_NO_CONTENT)
+                self.check_object_permissions(request, open_mic)
+                open_mic.delete()
+
+                return Response(status=status.HTTP_204_NO_CONTENT)
+            else:
+                return Response({'message': 'You do not own that open mic'}, status=status.HTTP_403_FORBIDDEN)
         except OpenMic.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
