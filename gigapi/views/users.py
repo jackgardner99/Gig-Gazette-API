@@ -1,4 +1,5 @@
 from django.http import HttpResponseServerError
+from django.contrib.auth import authenticate
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers
@@ -29,6 +30,28 @@ class Users(ViewSet):
     Purpose: Allow a user to communicate with the Gig Gazette database to GET PUT POST and DELETE Users.
     Methods: GET PUT(id) POST
 """
+    def login_user(self, request):
+        '''Handles the authentication of a manager
+            Method arguments:
+              request -- The full HTTP request object
+        '''
+
+        username = request.data['username']
+        password = request.data['password']
+
+        authenticated_user = authenticate(username=username, password=password)
+
+        if authenticated_user is not None:
+            token = Token.objects.get(user=authenticated_user)
+
+            data = {
+                'valid': True,
+                'token': token.key
+            }
+            return Response(data)
+        else:
+            data = {'valid': False}
+            return Response(data)
 
 
     def retrieve(self, request, pk=None):

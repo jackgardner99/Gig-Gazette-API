@@ -45,7 +45,7 @@ class ClientViewSet(viewsets.ViewSet):
         # Get the data from the client's JSON payload
         client_name = request.data.get('client_name')
         is_band = request.data.get('is_band')
-        genre_id = request.data.get('genre_id')
+        genre_id = request.data.get('genre')
         client_image = request.data.get('client_image')
 
         try:
@@ -103,9 +103,14 @@ class ClientViewSet(viewsets.ViewSet):
     def destroy(self, request, pk=None):
         try:
             client = Client.objects.get(pk=pk)
-            self.check_object_permissions(request, client)
-            client.delete()
+            if client.user.id == request.auth.user.id:
 
-            return Response(status=status.HTTP_204_NO_CONTENT)
+                self.check_object_permissions(request, client)
+                client.delete()
+            
+                return Response(status=status.HTTP_204_NO_CONTENT)
+            else: 
+                return Response({'message': 'You do not own that client'}, status=status.HTTP_403_FORBIDDEN)
+
         except Client.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
