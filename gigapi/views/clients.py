@@ -18,7 +18,7 @@ class ClientSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Client
-        fields = ['id', 'user', 'client_name', 'is_band', 'genre', 'is_owner', 'artists']
+        fields = ['id', 'user', 'client_name', 'is_band', 'genre', 'is_owner', 'artists', 'client_image']
 
 class ClientWriteSerializer(serializers.ModelSerializer):
     class Meta:
@@ -46,6 +46,7 @@ class ClientViewSet(viewsets.ViewSet):
         client_name = request.data.get('client_name')
         is_band = request.data.get('is_band')
         genre_id = request.data.get('genre_id')
+        client_image = request.data.get('client_image')
 
         try:
             genre = Genre.objects.get(pk=genre_id)
@@ -56,7 +57,8 @@ class ClientViewSet(viewsets.ViewSet):
             user=request.user,
             client_name=client_name,
             is_band=is_band,
-            genre=genre
+            genre=genre,
+            client_image=client_image
         )
 
         # Establish the many-to-many relationships
@@ -83,6 +85,7 @@ class ClientViewSet(viewsets.ViewSet):
 
                 client.client_name = serializer.validated_data['client_name']
                 client.is_band = serializer.validated_data['is_band']
+                client.client_image = serializer.validated_data['client_image']
                 client.genre = genre
                 client.save()
 
