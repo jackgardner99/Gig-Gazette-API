@@ -70,7 +70,7 @@ class Users(ViewSet):
 
 
 
-    def create(self, request):
+    def register(self, request):
         username = request.data.get('username')
         email = request.data.get('email')
         password = request.data.get('password')
