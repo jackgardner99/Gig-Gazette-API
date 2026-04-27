@@ -94,10 +94,10 @@
       "lng": -86.8001,
       "is_visible": true
     }
-  }
+  },
     {
         "model": "gigapi.restaurant",
-        "pk": 3,
+        "pk": 9,
         "fields": {
             "venue": 3,
             "name": "Green Hills Grille",
@@ -109,7 +109,7 @@
     },
     {
         "model": "gigapi.restaurant",
-        "pk": 4,
+        "pk": 10,
         "fields": {
             "venue": 4,
             "name": "Bridgestone Grill",
@@ -121,7 +121,7 @@
     },
     {
         "model": "gigapi.restaurant",
-        "pk": 5,
+        "pk": 11,
         "fields": {
             "venue": 5,
             "name": "Station Inn Kitchen",
@@ -133,7 +133,7 @@
     },
     {
         "model": "gigapi.restaurant",
-        "pk": 6,
+        "pk": 12,
         "fields": {
             "venue": 6,
             "name": "Germantown Cafe",
@@ -145,7 +145,7 @@
     },
     {
         "model": "gigapi.restaurant",
-        "pk": 7,
+        "pk": 13,
         "fields": {
             "venue": 7,
             "name": "Rolf and Daughters",
@@ -157,7 +157,7 @@
     },
     {
         "model": "gigapi.restaurant",
-        "pk": 8,
+        "pk": 14,
         "fields": {
             "venue": 8,
             "name": "Riverfront Tacos",
@@ -169,7 +169,7 @@
     },
     {
         "model": "gigapi.restaurant",
-        "pk": 9,
+        "pk": 15,
         "fields": {
             "venue": 9,
             "name": "The Listening Room Kitchen",
@@ -181,7 +181,7 @@
     },
     {
         "model": "gigapi.restaurant",
-        "pk": 10,
+        "pk": 16,
         "fields": {
             "venue": 10,
             "name": "Five Points Pizza",
