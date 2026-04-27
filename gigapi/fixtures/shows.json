@@ -3,7 +3,7 @@
         "model": "gigapi.show",
         "pk": 1,
         "fields": {
-            "event_title": "Jack Holliday Live at the Ryman",
+            "event_title": "Jack Holliday Live at the 5 Spot",
             "client": 1,
             "poster_img": "",
             "date": "2026-05-10",
@@ -94,7 +94,7 @@
         "model": "gigapi.show",
         "pk": 8,
         "fields": {
-            "event_title": "Downriver Collective at Ascend Amphitheater",
+            "event_title": "Downriver Collective at the Vinyl Lounge",
             "client": 4,
             "poster_img": "",
             "date": "2026-06-07",
@@ -107,7 +107,7 @@
         "model": "gigapi.show",
         "pk": 9,
         "fields": {
-            "event_title": "Jack Holliday at Third Man Records",
+            "event_title": "Jack Holliday at Analog",
             "client": 1,
             "poster_img": "",
             "date": "2026-06-12",
@@ -120,7 +120,7 @@
         "model": "gigapi.show",
         "pk": 10,
         "fields": {
-            "event_title": "Kadi Beth at Bridgestone Arena",
+            "event_title": "Kadi Beth at 3rd and Lindsley",
             "client": 2,
             "poster_img": "",
             "date": "2026-06-20",

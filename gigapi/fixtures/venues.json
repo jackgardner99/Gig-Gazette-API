@@ -3,14 +3,14 @@
         "model": "gigapi.venue",
         "pk": 1,
         "fields": {
-            "name": "Ryman Auditorium",
-            "lat": 36.161483,
-            "lng": -86.778000,
-            "noise_level": "high",
+            "name": "The 5 Spot",
+            "lat": 36.17838,
+            "lng": -86.75035,
+            "noise_level": "medium",
             "parking": false,
             "bar": true,
             "food": false,
-            "kid_friendly": true
+            "kid_friendly": false
         }
     },
     {
@@ -18,10 +18,10 @@
         "pk": 2,
         "fields": {
             "name": "Exit/In",
-            "lat": 36.149860,
-            "lng": -86.799730,
+            "lat": 36.15133,
+            "lng": -86.80433,
             "noise_level": "high",
-            "parking": false,
+            "parking": true,
             "bar": true,
             "food": false,
             "kid_friendly": false
@@ -32,8 +32,8 @@
         "pk": 3,
         "fields": {
             "name": "The Bluebird Cafe",
-            "lat": 36.099270,
-            "lng": -86.831600,
+            "lat": 36.10202,
+            "lng": -86.81693,
             "noise_level": "low",
             "parking": true,
             "bar": true,
@@ -45,10 +45,10 @@
         "model": "gigapi.venue",
         "pk": 4,
         "fields": {
-            "name": "Bridgestone Arena",
-            "lat": 36.159180,
-            "lng": -86.778610,
-            "noise_level": "high",
+            "name": "3rd and Lindsley",
+            "lat": 36.15218,
+            "lng": -86.76983,
+            "noise_level": "medium",
             "parking": true,
             "bar": true,
             "food": true,
@@ -60,12 +60,12 @@
         "pk": 5,
         "fields": {
             "name": "Station Inn",
-            "lat": 36.155280,
-            "lng": -86.789940,
+            "lat": 36.15252,
+            "lng": -86.78452,
             "noise_level": "medium",
             "parking": false,
             "bar": true,
-            "food": false,
+            "food": true,
             "kid_friendly": false
         }
     },
@@ -74,8 +74,8 @@
         "pk": 6,
         "fields": {
             "name": "Marathon Music Works",
-            "lat": 36.154430,
-            "lng": -86.800570,
+            "lat": 36.16390,
+            "lng": -86.79752,
             "noise_level": "high",
             "parking": true,
             "bar": true,
@@ -88,8 +88,8 @@
         "pk": 7,
         "fields": {
             "name": "The Basement",
-            "lat": 36.132570,
-            "lng": -86.771780,
+            "lat": 36.13706,
+            "lng": -86.77845,
             "noise_level": "medium",
             "parking": false,
             "bar": true,
@@ -101,10 +101,10 @@
         "model": "gigapi.venue",
         "pk": 8,
         "fields": {
-            "name": "Ascend Amphitheater",
-            "lat": 36.162870,
-            "lng": -86.773140,
-            "noise_level": "high",
+            "name": "The Vinyl Lounge",
+            "lat": 36.14141,
+            "lng": -86.76284,
+            "noise_level": "medium",
             "parking": true,
             "bar": true,
             "food": true,
@@ -116,8 +116,8 @@
         "pk": 9,
         "fields": {
             "name": "The Listening Room Cafe",
-            "lat": 36.156020,
-            "lng": -86.782450,
+            "lat": 36.15375,
+            "lng": -86.77228,
             "noise_level": "low",
             "parking": false,
             "bar": true,
@@ -129,14 +129,42 @@
         "model": "gigapi.venue",
         "pk": 10,
         "fields": {
-            "name": "Third Man Records",
-            "lat": 36.154990,
-            "lng": -86.796560,
+            "name": "Analog",
+            "lat": 36.15299,
+            "lng": -86.79706,
             "noise_level": "medium",
             "parking": false,
-            "bar": false,
+            "bar": true,
             "food": false,
             "kid_friendly": true
+        }
+    },
+    {
+        "model": "gigapi.venue",
+        "pk": 11,
+        "fields": {
+            "name": "The Basement East",
+            "lat": 36.17568,
+            "lng": -86.75562,
+            "noise_level": "medium",
+            "parking": true,
+            "bar": true,
+            "food": false,
+            "kid_friendly": true
+        }
+    },
+    {
+        "model": "gigapi.venue",
+        "pk": 12,
+        "fields": {
+            "name": "Brooklyn Bowl",
+            "lat": 36.17338,
+            "lng": -86.78388,
+            "noise_level": "high",
+            "parking": false,
+            "bar": true,
+            "food": true,
+            "kid_friendly": false
         }
     }
 ]

@@ -4,11 +4,11 @@
         "pk": 1,
         "fields": {
             "venue": 1,
-            "name": "The Southern Steak & Oyster",
-            "food_type": "Southern",
-            "lat": 36.161200,
-            "lng": -86.778500,
-            "is_visible": false
+            "name": "5 Points Pizza",
+            "food_type": "Pizza",
+            "lat": 36.17709,
+            "lng": -86.75054,
+            "is_visible": true
         }
     },
     {
@@ -16,13 +16,85 @@
         "pk": 2,
         "fields": {
             "venue": 1,
-            "name": "Puckett's Grocery & Restaurant",
-            "food_type": "American",
-            "lat": 36.161600,
-            "lng": -86.777800,
-            "is_visible": false
+            "name": "Noble's",
+            "food_type": "Beer Hall",
+            "lat": 36.17773,
+            "lng": -86.75187,
+            "is_visible": true
         }
     },
+    {
+        "model": "gigapi.restaurant",
+        "pk": 3,
+        "fields": {
+            "venue": 1,
+            "name": "Hunters Station",
+            "food_type": "Food Court",
+            "lat": 36.17837,
+            "lng": -86.75222,
+            "is_visible": true
+        }
+    },
+    {
+    "model": "gigapi.restaurant",
+    "pk": 4,
+    "fields": {
+      "venue": 2,
+      "name": "Verna",
+      "food_type": "American",
+      "lat": 36.1468,
+      "lng": -86.8042,
+      "is_visible": true
+    }
+  },
+  {
+    "model": "gigapi.restaurant",
+    "pk": 5,
+    "fields": {
+      "venue": 2,
+      "name": "Samurai Sushi",
+      "food_type": "Japanese",
+      "lat": 36.1523,
+      "lng": -86.7981,
+      "is_visible": true
+    }
+  },
+  {
+    "model": "gigapi.restaurant",
+    "pk": 6,
+    "fields": {
+      "venue": 2,
+      "name": "Elliston Place Soda Shop",
+      "food_type": "American Diner",
+      "lat": 36.1497,
+      "lng": -86.8076,
+      "is_visible": true
+    }
+  },
+  {
+    "model": "gigapi.restaurant",
+    "pk": 7,
+    "fields": {
+      "venue": 2,
+      "name": "Wingstop",
+      "food_type": "Wings",
+      "lat": 36.1412,
+      "lng": -86.7950,
+      "is_visible": true
+    }
+  },
+  {
+    "model": "gigapi.restaurant",
+    "pk": 8,
+    "fields": {
+      "venue": 2,
+      "name": "Jimmy John's",
+      "food_type": "Sandwiches",
+      "lat": 36.1539,
+      "lng": -86.8001,
+      "is_visible": true
+    }
+  }
     {
         "model": "gigapi.restaurant",
         "pk": 3,
@@ -32,7 +104,7 @@
             "food_type": "American",
             "lat": 36.099500,
             "lng": -86.831200,
-            "is_visible": false
+            "is_visible": true
         }
     },
     {
@@ -44,7 +116,7 @@
             "food_type": "American",
             "lat": 36.159000,
             "lng": -86.778900,
-            "is_visible": false
+            "is_visible": true
         }
     },
     {
@@ -56,7 +128,7 @@
             "food_type": "Southern",
             "lat": 36.155100,
             "lng": -86.790200,
-            "is_visible": false
+            "is_visible": true
         }
     },
     {
@@ -68,7 +140,7 @@
             "food_type": "American",
             "lat": 36.154600,
             "lng": -86.800100,
-            "is_visible": false
+            "is_visible": true
         }
     },
     {
@@ -80,7 +152,7 @@
             "food_type": "Italian",
             "lat": 36.132800,
             "lng": -86.771500,
-            "is_visible": false
+            "is_visible": true
         }
     },
     {
@@ -92,7 +164,7 @@
             "food_type": "Mexican",
             "lat": 36.162500,
             "lng": -86.773400,
-            "is_visible": false
+            "is_visible": true
         }
     },
     {
@@ -104,7 +176,7 @@
             "food_type": "American",
             "lat": 36.155900,
             "lng": -86.782600,
-            "is_visible": false
+            "is_visible": true
         }
     },
     {
@@ -116,7 +188,7 @@
             "food_type": "Pizza",
             "lat": 36.155200,
             "lng": -86.796300,
-            "is_visible": false
+            "is_visible": true
         }
     }
 ]

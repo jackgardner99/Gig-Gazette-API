@@ -8,7 +8,7 @@
         "start_time": "19:00:00",
         "end_time": "22:00:00",
         "event_image": "",
-        "venue": 2
+        "venue": 8
     }},
     {"model": "gigapi.openmic", "pk": 2, "fields": {
         "event_title": "Pitch Meeting",
@@ -19,6 +19,6 @@
         "start_time": "18:00:00",
         "end_time": "21:00:00",
         "event_image": "",
-        "venue": 5
+        "venue": 10
     }}
 ]
