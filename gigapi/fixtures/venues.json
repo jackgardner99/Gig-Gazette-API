@@ -115,7 +115,7 @@
         "model": "gigapi.venue",
         "pk": 9,
         "fields": {
-            "name": "The Listening Room Cafe",
+            "name": "The Listening Room",
             "lat": 36.15375,
             "lng": -86.77228,
             "noise_level": "low",
