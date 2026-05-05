@@ -6,7 +6,6 @@ from .venues import VenueSerializer, Venue
 
 
 class WritersRoundSerializer(serializers.ModelSerializer):
-    is_owner = serializers.SerializerMethodField()
     venue = VenueSerializer()
 
     class Meta:
