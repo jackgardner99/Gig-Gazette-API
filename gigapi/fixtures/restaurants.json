@@ -418,5 +418,41 @@
             "lng": -86.78783,
             "is_visible": true
         }
+    },
+    {
+        "model": "gigapi.restaurant",
+        "pk": 36,
+        "fields": {
+            "venue": 17,
+            "name": "Jack Cawthon's Bar-B-Que",
+            "food_type": "BBQ Restaurant",
+            "lat": 36.15940,
+            "lng": -86.79613,
+            "is_visible": true
+        }
+    },
+    {
+        "model": "gigapi.restaurant",
+        "pk": 37,
+        "fields": {
+            "venue": 17,
+            "name": "Halls Chophouse",
+            "food_type": "Steakhouse",
+            "lat": 36.15467,
+            "lng": -86.79360,
+            "is_visible": true
+        }
+    },
+    {
+        "model": "gigapi.restaurant",
+        "pk": 38,
+        "fields": {
+            "venue": 17,
+            "name": "Jimmy Kelly's",
+            "food_type": "Steakhouse",
+            "lat": 36.15207,
+            "lng": -86.80564,
+            "is_visible": true
+        }
     }
 ]
