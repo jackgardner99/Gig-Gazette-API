@@ -44,24 +44,20 @@ class ShowViewSet(viewsets.ViewSet):
             return Response(status=status.HTTP_404_NOT_FOUND)
         
     def create(self, request):
-        # Get the data from the client's JSON payload
-        client_id = request.data.get('client_id')
-        poster_img = request.data.get('poster_img')
-        date = request.data.get('date')
-        start_time = request.data.get('start_time')
-        end_time = request.data.get('end_time')
+        venue_id = request.data.get('venue_id') or request.data.get('venue')
 
         try:
-            client = Client.objects.get(pk=client_id)
-        except Client.DoesNotExist:
-            return Response({'error': 'Client not found'}, status=status.HTTP_400_BAD_REQUEST)
+            venue = Venue.objects.get(pk=venue_id)
+        except Venue.DoesNotExist:
+            return Response({'error': 'Venue not found'}, status=status.HTTP_400_BAD_REQUEST)
 
         show = Show.objects.create(
-            client=client,
-            poster_img=poster_img,
-            date=date,
-            start_time=start_time,
-            end_time=end_time
+            venue=venue,
+            event_title=request.data.get('event_title'),
+            poster_img=request.data.get('poster_img'),
+            date=request.data.get('date'),
+            start_time=request.data.get('start_time'),
+            end_time=request.data.get('end_time'),
         )
 
         serializer = ShowSerializer(show, context={'request': request})

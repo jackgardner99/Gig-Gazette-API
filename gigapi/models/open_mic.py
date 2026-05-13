@@ -5,7 +5,7 @@ from .venue import Venue
 
 class OpenMic(models.Model):
     event_title = models.CharField(max_length=255)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="open_mics")
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, related_name="open_mics", null=True, blank=True)
     recurrence = models.BooleanField(default=False)
     weekly_recurrence = models.CharField(max_length=255, blank=True, null=True)
     monthly_recurrence = models.CharField(max_length=255, blank=True, null=True)

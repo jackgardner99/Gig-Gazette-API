@@ -20,6 +20,25 @@ class WritersRoundViewSet(viewsets.ViewSet):
         serializer = WritersRoundSerializer(writers_rounds, many=True, context={'request': request})
         return Response(serializer.data)
 
+    def create(self, request):
+        venue_id = request.data.get('venue_id') or request.data.get('venue')
+
+        try:
+            venue = Venue.objects.get(pk=venue_id)
+        except Venue.DoesNotExist:
+            return Response({'error': 'Venue not found'}, status=status.HTTP_400_BAD_REQUEST)
+
+        writers_round = WritersRound.objects.create(
+            venue=venue,
+            event_title=request.data.get('event_title'),
+            date=request.data.get('date'),
+            start_time=request.data.get('start_time'),
+            end_time=request.data.get('end_time'),
+        )
+
+        serializer = WritersRoundSerializer(writers_round, context={'request': request})
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
     def retrieve(self, request, pk=None):
         try:
             writers_round = WritersRound.objects.select_related('venue').get(pk=pk)

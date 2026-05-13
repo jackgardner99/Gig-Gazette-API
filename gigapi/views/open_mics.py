@@ -57,7 +57,6 @@ class OpenMicViewSet(viewsets.ViewSet):
             return Response({'error': 'Venue not found'}, status=status.HTTP_400_BAD_REQUEST)
 
         open_mic = OpenMic.objects.create(
-            user=request.user,
             event_title=event_title,
             recurrence=recurrence,
             weekly_recurrence=weekly_recurrence,
