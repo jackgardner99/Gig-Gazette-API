@@ -42,6 +42,9 @@ class OpenMicViewSet(viewsets.ViewSet):
             return Response(status=status.HTTP_404_NOT_FOUND)
 
     def create(self, request):
+        if not request.user.is_authenticated:
+            return Response({'error': 'Authentication required'}, status=status.HTTP_401_UNAUTHORIZED)
+
         event_title = request.data.get('event_title')
         recurrence = request.data.get('recurrence')
         weekly_recurrence = request.data.get('weekly_recurrence')
@@ -57,6 +60,7 @@ class OpenMicViewSet(viewsets.ViewSet):
             return Response({'error': 'Venue not found'}, status=status.HTTP_400_BAD_REQUEST)
 
         open_mic = OpenMic.objects.create(
+            user=request.user,
             event_title=event_title,
             recurrence=recurrence,
             weekly_recurrence=weekly_recurrence,
@@ -71,6 +75,9 @@ class OpenMicViewSet(viewsets.ViewSet):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def update(self, request, pk=None):
+        if not request.user.is_authenticated:
+            return Response({'error': 'Authentication required'}, status=status.HTTP_401_UNAUTHORIZED)
+
         try:
 
             open_mic = OpenMic.objects.get(pk=pk)
@@ -104,6 +111,9 @@ class OpenMicViewSet(viewsets.ViewSet):
             return Response(status=status.HTTP_404_NOT_FOUND)
         
     def destroy(self, request, pk=None):
+        if not request.user.is_authenticated:
+            return Response({'error': 'Authentication required'}, status=status.HTTP_401_UNAUTHORIZED)
+
         try:
             open_mic = OpenMic.objects.get(pk=pk)
             if open_mic.user.id == request.auth.user.id:
