@@ -1,5 +1,7 @@
 from django.http import HttpResponseServerError
 from django.contrib.auth import authenticate
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers
@@ -24,6 +26,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('id', 'url', 'username', 'password', 'first_name', 'last_name', 'email', 'is_active', 'date_joined')
 
 
+@method_decorator(csrf_exempt, name='dispatch')
 class Users(ViewSet):
     permission_classes = [AllowAny]
     """Users for Gig Gazette
