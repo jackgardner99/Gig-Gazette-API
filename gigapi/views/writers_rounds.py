@@ -21,6 +21,9 @@ class WritersRoundViewSet(viewsets.ViewSet):
         return Response(serializer.data)
 
     def create(self, request):
+        if not request.user.is_authenticated:
+            return Response({'error': 'Authentication required'}, status=status.HTTP_401_UNAUTHORIZED)
+
         venue_id = request.data.get('venue_id') or request.data.get('venue')
 
         try:
