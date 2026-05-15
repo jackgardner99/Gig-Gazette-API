@@ -42,8 +42,8 @@
       "venue": 2,
       "name": "Verna",
       "food_type": "American",
-      "lat": 36.1468,
-      "lng": -86.8042,
+      "lat": 36.15185,
+      "lng": -86.80495,
       "is_visible": true
     }
   },
@@ -54,8 +54,8 @@
       "venue": 2,
       "name": "Samurai Sushi",
       "food_type": "Japanese",
-      "lat": 36.1523,
-      "lng": -86.7981,
+      "lat": 36.15127,
+      "lng": -86.80398,
       "is_visible": true
     }
   },
@@ -66,8 +66,8 @@
       "venue": 2,
       "name": "Elliston Place Soda Shop",
       "food_type": "American Diner",
-      "lat": 36.1497,
-      "lng": -86.8076,
+      "lat": 36.15178,
+      "lng": -86.80318,
       "is_visible": true
     }
   },
@@ -78,8 +78,8 @@
       "venue": 2,
       "name": "Wingstop",
       "food_type": "Wings",
-      "lat": 36.1412,
-      "lng": -86.7950,
+      "lat": 36.15170,
+      "lng": -86.80347,
       "is_visible": true
     }
   },
@@ -87,11 +87,11 @@
     "model": "gigapi.restaurant",
     "pk": 8,
     "fields": {
-      "venue": 2,
-      "name": "Jimmy John's",
-      "food_type": "Sandwiches",
-      "lat": 36.1539,
-      "lng": -86.8001,
+      "venue": 3,
+      "name": "Corner Pub",
+      "food_type": "Burgers",
+      "lat": 36.10183,
+      "lng": -86.81816,
       "is_visible": true
     }
   },
@@ -102,8 +102,8 @@
             "venue": 3,
             "name": "Green Hills Grille",
             "food_type": "American",
-            "lat": 36.099500,
-            "lng": -86.831200,
+            "lat": 36.10505,
+            "lng": -86.81222,
             "is_visible": true
         }
     },
@@ -111,11 +111,11 @@
         "model": "gigapi.restaurant",
         "pk": 10,
         "fields": {
-            "venue": 4,
-            "name": "Bridgestone Grill",
-            "food_type": "American",
-            "lat": 36.159000,
-            "lng": -86.778900,
+            "venue": 3,
+            "name": "The Greenhouse Bar",
+            "food_type": "Cocktail Bar",
+            "lat": 36.10435,
+            "lng": -86.81762,
             "is_visible": true
         }
     },
@@ -124,10 +124,10 @@
         "pk": 11,
         "fields": {
             "venue": 5,
-            "name": "Station Inn Kitchen",
-            "food_type": "Southern",
-            "lat": 36.155100,
-            "lng": -86.790200,
+            "name": "The Pub",
+            "food_type": "Burgers",
+            "lat": 36.15269,
+            "lng": -86.78348,
             "is_visible": true
         }
     },
@@ -135,11 +135,11 @@
         "model": "gigapi.restaurant",
         "pk": 12,
         "fields": {
-            "venue": 6,
-            "name": "Germantown Cafe",
-            "food_type": "American",
-            "lat": 36.154600,
-            "lng": -86.800100,
+            "venue": 5,
+            "name": "Emmy Squared Pizza",
+            "food_type": "Pizza",
+            "lat": 36.15237,
+            "lng": -86.78448,
             "is_visible": true
         }
     },
@@ -147,11 +147,11 @@
         "model": "gigapi.restaurant",
         "pk": 13,
         "fields": {
-            "venue": 7,
-            "name": "Rolf and Daughters",
-            "food_type": "Italian",
-            "lat": 36.132800,
-            "lng": -86.771500,
+            "venue": 5,
+            "name": "Gumbo Bros",
+            "food_type": "Cajun",
+            "lat": 36.15191,
+            "lng": -86.78465,
             "is_visible": true
         }
     },
@@ -159,11 +159,11 @@
         "model": "gigapi.restaurant",
         "pk": 14,
         "fields": {
-            "venue": 8,
-            "name": "Riverfront Tacos",
-            "food_type": "Mexican",
-            "lat": 36.162500,
-            "lng": -86.773400,
+            "venue": 4,
+            "name": "The Goat",
+            "food_type": "American",
+            "lat": 36.15361,
+            "lng": -86.77084,
             "is_visible": true
         }
     },
@@ -171,11 +171,11 @@
         "model": "gigapi.restaurant",
         "pk": 15,
         "fields": {
-            "venue": 9,
-            "name": "The Listening Room Kitchen",
-            "food_type": "American",
-            "lat": 36.155900,
-            "lng": -86.782600,
+            "venue": 4,
+            "name": "Aba",
+            "food_type": "Mediterranean Cuisine",
+            "lat": 36.14268,
+            "lng": -86.76734,
             "is_visible": true
         }
     },
@@ -183,11 +183,275 @@
         "model": "gigapi.restaurant",
         "pk": 16,
         "fields": {
-            "venue": 10,
-            "name": "Five Points Pizza",
+            "venue": 4,
+            "name": "Dicey's Pizza and Tavern",
             "food_type": "Pizza",
-            "lat": 36.155200,
-            "lng": -86.796300,
+            "lat": 36.14403,
+            "lng": -86.76801,
+            "is_visible": true
+        }
+    },
+    {
+        "model": "gigapi.restaurant",
+        "pk": 17,
+        "fields": {
+            "venue": 6,
+            "name": "Nelson's Green Brier Distillery",
+            "food_type": "American",
+            "lat": 36.16374,
+            "lng": -86.79813,
+            "is_visible": true
+        }
+    },
+    {
+        "model": "gigapi.restaurant",
+        "pk": 18,
+        "fields": {
+            "venue": 6,
+            "name": "Zozkitchen",
+            "food_type": "American",
+            "lat": 36.16371,
+            "lng": -86.79719,
+            "is_visible": true
+        }
+    },
+    {
+        "model": "gigapi.restaurant",
+        "pk": 19,
+        "fields": {
+            "venue": 6,
+            "name": "Trap Fusion Xpress",
+            "food_type": "Caribbean",
+            "lat": 36.16350,
+            "lng": -86.79674,
+            "is_visible": true
+        }
+    },
+    {
+        "model": "gigapi.restaurant",
+        "pk": 20,
+        "fields": {
+            "venue": 7,
+            "name": "Hattie B's Chicken",
+            "food_type": "Hot Chicken",
+            "lat": 36.12881,
+            "lng": -86.77769,
+            "is_visible": true
+        }
+    },
+    {
+        "model": "gigapi.restaurant",
+        "pk": 21,
+        "fields": {
+            "venue": 7,
+            "name": "The Smiling Elephant",
+            "food_type": "Thai Cuisine",
+            "lat": 36.12942,
+            "lng": -86.77854,
+            "is_visible": true
+        }
+    },
+    {
+        "model": "gigapi.restaurant",
+        "pk": 22,
+        "fields": {
+            "venue": 7,
+            "name": "Love Peace & Pho",
+            "food_type": "Vietnamese",
+            "lat": 36.13144,
+            "lng": -86.77866,
+            "is_visible": true
+        }
+    },
+    {
+        "model": "gigapi.restaurant",
+        "pk": 23,
+        "fields": {
+            "venue": 8,
+            "name": "IL Forno",
+            "food_type": "Italian Cuisine",
+            "lat": 36.14136,
+            "lng": -86.76277,
+            "is_visible": true
+        }
+    },
+    {
+        "model": "gigapi.restaurant",
+        "pk": 24,
+        "fields": {
+            "venue": 8,
+            "name": "Bastion",
+            "food_type": "Cocktail Bar",
+            "lat": 36.14294,
+            "lng": -86.76646,
+            "is_visible": true
+        }
+    },
+    {
+        "model": "gigapi.restaurant",
+        "pk": 25,
+        "fields": {
+            "venue": 8,
+            "name": "Pastis",
+            "food_type": "French Cuisine",
+            "lat": 36.14314,
+            "lng": -86.76835,
+            "is_visible": true
+        }
+    },
+    {
+        "model": "gigapi.restaurant",
+        "pk": 26,
+        "fields": {
+            "venue": 9,
+            "name": "The Listening Room Cafe",
+            "food_type": "Dinner Theater",
+            "lat": 36.15380,
+            "lng": -86.77228,
+            "is_visible": true
+        }
+    },
+    {
+        "model": "gigapi.restaurant",
+        "pk": 27,
+        "fields": {
+            "venue": 10,
+            "name": "The Row Kitchen and Pub",
+            "food_type": "Southern Cuisine",
+            "lat": 36.15129,
+            "lng": -86.79776,
+            "is_visible": true
+        }
+    },
+    {
+        "model": "gigapi.restaurant",
+        "pk": 28,
+        "fields": {
+            "venue": 10,
+            "name": "Midtown Cafe",
+            "food_type": "American Cuisine",
+            "lat": 36.15197,
+            "lng": -86.79690,
+            "is_visible": true
+        }
+    },
+    {
+        "model": "gigapi.restaurant",
+        "pk": 29,
+        "fields": {
+            "venue": 10,
+            "name": "Evelyn's",
+            "food_type": "American Cuisine",
+            "lat": 36.15279,
+            "lng": -86.79705,
+            "is_visible": true
+        }
+    },
+    {
+        "model": "gigapi.restaurant",
+        "pk": 30,
+        "fields": {
+            "venue": 11,
+            "name": "Smith & Lentz Brewing",
+            "food_type": "Pizza",
+            "lat": 36.17644,
+            "lng": -86.75665,
+            "is_visible": true
+        }
+    },
+    {
+        "model": "gigapi.restaurant",
+        "pk": 31,
+        "fields": {
+            "venue": 11,
+            "name": "Edley's Bar-B-Que",
+            "food_type": "BBQ Restaurant",
+            "lat": 36.17697,
+            "lng": -86.75082,
+            "is_visible": true
+        }
+    },
+    {
+        "model": "gigapi.restaurant",
+        "pk": 32,
+        "fields": {
+            "venue": 11,
+            "name": "Brave Idiot",
+            "food_type": "American Cuisine",
+            "lat": 36.17642,
+            "lng": -86.75526,
+            "is_visible": true
+        }
+    },
+    {
+        "model": "gigapi.restaurant",
+        "pk": 33,
+        "fields": {
+            "venue": 12,
+            "name": "Von Elrod's Beer Hall and Kitchen",
+            "food_type": "Beer Hall",
+            "lat": 36.17369,
+            "lng": -86.78499,
+            "is_visible": true
+        }
+    },
+    {
+        "model": "gigapi.restaurant",
+        "pk": 34,
+        "fields": {
+            "venue": 12,
+            "name": "Jack Brown's Beer & Burger Joint",
+            "food_type": "Burgers",
+            "lat": 36.17592,
+            "lng": -86.78557,
+            "is_visible": true
+        }
+    },
+    {
+        "model": "gigapi.restaurant",
+        "pk": 35,
+        "fields": {
+            "venue": 12,
+            "name": "Germantown Cafe",
+            "food_type": "New American Cuisine",
+            "lat": 36.17550,
+            "lng": -86.78783,
+            "is_visible": true
+        }
+    },
+    {
+        "model": "gigapi.restaurant",
+        "pk": 36,
+        "fields": {
+            "venue": 17,
+            "name": "Jack Cawthon's Bar-B-Que",
+            "food_type": "BBQ Restaurant",
+            "lat": 36.15940,
+            "lng": -86.79613,
+            "is_visible": true
+        }
+    },
+    {
+        "model": "gigapi.restaurant",
+        "pk": 37,
+        "fields": {
+            "venue": 17,
+            "name": "Halls Chophouse",
+            "food_type": "Steakhouse",
+            "lat": 36.15467,
+            "lng": -86.79360,
+            "is_visible": true
+        }
+    },
+    {
+        "model": "gigapi.restaurant",
+        "pk": 38,
+        "fields": {
+            "venue": 17,
+            "name": "Jimmy Kelly's",
+            "food_type": "Steakhouse",
+            "lat": 36.15207,
+            "lng": -86.80564,
             "is_visible": true
         }
     }

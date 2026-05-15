@@ -115,7 +115,7 @@
         "model": "gigapi.venue",
         "pk": 9,
         "fields": {
-            "name": "The Listening Room Cafe",
+            "name": "The Listening Room",
             "lat": 36.15375,
             "lng": -86.77228,
             "noise_level": "low",
@@ -165,6 +165,90 @@
             "bar": true,
             "food": true,
             "kid_friendly": false
+        }
+    },
+    {
+        "model": "gigapi.venue",
+        "pk": 13,
+        "fields": {
+            "name": "Tennessee Brew Works",
+            "lat": 36.15033,
+            "lng": -86.77609,
+            "noise_level": "low",
+            "parking": false,
+            "bar": true,
+            "food": true,
+            "kid_friendly": true
+        }
+    },
+    {
+        "model": "gigapi.venue",
+        "pk": 14,
+        "fields": {
+            "name": "The Local",
+            "lat": 36.14586,
+            "lng": -86.81267,
+            "noise_level": "low",
+            "parking": false,
+            "bar": true,
+            "food": true,
+            "kid_friendly": true
+        }
+    },
+    {
+        "model": "gigapi.venue",
+        "pk": 15,
+        "fields": {
+            "name": "Commodore Grille",
+            "lat": 36.14483,
+            "lng": -86.81112,
+            "noise_level": "low",
+            "parking": true,
+            "bar": true,
+            "food": true,
+            "kid_friendly": true
+        }
+    },
+    {
+        "model": "gigapi.venue",
+        "pk": 16,
+        "fields": {
+            "name": "Cambria Hotel",
+            "lat": 36.15771,
+            "lng": -86.78100,
+            "noise_level": "low",
+            "parking": true,
+            "bar": true,
+            "food": true,
+            "kid_friendly": true
+        }
+    },
+    {
+        "model": "gigapi.venue",
+        "pk": 17,
+        "fields": {
+            "name": "The Stillery Midtown",
+            "lat": 36.14955,
+            "lng": -86.79772,
+            "noise_level": "low",
+            "parking": false,
+            "bar": true,
+            "food": true,
+            "kid_friendly": true
+        }
+    },
+    {
+        "model": "gigapi.venue",
+        "pk": 18,
+        "fields": {
+            "name": "1865 Club",
+            "lat": 36.15941,
+            "lng": -86.80671,
+            "noise_level": "low",
+            "parking": false,
+            "bar": true,
+            "food": false,
+            "kid_friendly": true
         }
     }
 ]
