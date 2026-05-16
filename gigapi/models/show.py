@@ -1,11 +1,11 @@
 from django.db import models
-from .client import Client
+from django.contrib.auth.models import User
 from .venue import Venue
 
 
 class Show(models.Model):
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, related_name="shows", null=True, blank=True)
     event_title = models.CharField(max_length=255)
-    client = models.ForeignKey(Client, on_delete=models.SET_NULL, related_name="shows", null=True, blank=True)
     poster_img = models.ImageField(upload_to="posters/", blank=True, null=True)
     date = models.DateField()
     start_time = models.TimeField()
