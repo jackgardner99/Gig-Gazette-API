@@ -49,3 +49,40 @@ class WritersRoundViewSet(viewsets.ViewSet):
             return Response(serializer.data)
         except WritersRound.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
+
+    def update(self, request, pk=None):
+        if not request.user.is_authenticated:
+            return Response({'error': 'Authentication required'}, status=status.HTTP_401_UNAUTHORIZED)
+
+        try:
+            writers_round = WritersRound.objects.get(pk=pk)
+
+            venue_id = request.data.get('venue_id') or request.data.get('venue')
+            try:
+                venue = Venue.objects.get(pk=venue_id)
+            except Venue.DoesNotExist:
+                return Response({'error': 'Venue not found'}, status=status.HTTP_400_BAD_REQUEST)
+
+            writers_round.event_title = request.data.get('event_title', writers_round.event_title)
+            writers_round.date = request.data.get('date', writers_round.date)
+            writers_round.start_time = request.data.get('start_time', writers_round.start_time)
+            writers_round.end_time = request.data.get('end_time', writers_round.end_time)
+            writers_round.venue = venue
+            writers_round.save()
+
+            serializer = WritersRoundSerializer(writers_round, context={'request': request})
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
+        except WritersRound.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+    def destroy(self, request, pk=None):
+        if not request.user.is_authenticated:
+            return Response({'error': 'Authentication required'}, status=status.HTTP_401_UNAUTHORIZED)
+
+        try:
+            writers_round = WritersRound.objects.get(pk=pk)
+            writers_round.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        except WritersRound.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)

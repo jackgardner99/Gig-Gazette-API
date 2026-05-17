@@ -46,15 +46,9 @@ class Users(ViewSet):
 
         if authenticated_user is not None:
             token = Token.objects.get(user=authenticated_user)
-
-            data = {
-                'valid': True,
-                'token': token.key
-            }
-            return Response(data)
+            return Response({'valid': True, 'token': token.key, 'id': authenticated_user.id})
         else:
-            data = {'valid': False}
-            return Response(data)
+            return Response({'valid': False})
 
 
     def retrieve(self, request, pk=None):
@@ -92,7 +86,7 @@ class Users(ViewSet):
         )
 
         token = Token.objects.create(user=user)
-        return Response({'token': token.key}, status=status.HTTP_201_CREATED)
+        return Response({'token': token.key, 'id': user.id}, status=status.HTTP_201_CREATED)
 
     def list(self, request):
         """Handle GET requests to user resource"""

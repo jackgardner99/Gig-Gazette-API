@@ -1,46 +1,62 @@
 [
-    {"model": "gigapi.openmic", "pk": 1, "fields": {
-        "event_title": "Artist Night",
-        "user": 1,
-        "recurrence": true,
-        "weekly_recurrence": "Mondays",
-        "monthly_recurrence": null,
-        "start_time": "19:00:00",
-        "end_time": "22:00:00",
-        "event_image": "",
-        "venue": 8
-    }},
-    {"model": "gigapi.openmic", "pk": 2, "fields": {
-        "event_title": "Pitch Meeting",
-        "user": 1,
-        "recurrence": true,
-        "weekly_recurrence": "Tuesdays",
-        "monthly_recurrence": null,
-        "start_time": "18:00:00",
-        "end_time": "21:00:00",
-        "event_image": "",
-        "venue": 10
-    }},
-    {"model": "gigapi.openmic", "pk": 3, "fields": {
-        "event_title": "Tennessee Brew Works Open Mic",
-        "user": 1,
-        "recurrence": true,
-        "weekly_recurrence": "Mondays",
-        "monthly_recurrence": null,
-        "start_time": "18:00:00",
-        "end_time": "20:00:00",
-        "event_image": "",
-        "venue": 13
-    }},
-    {"model": "gigapi.openmic", "pk": 4, "fields": {
-        "event_title": "Bluebird Cafe Open Mic",
-        "user": 1,
-        "recurrence": true,
-        "weekly_recurrence": "Mondays",
-        "monthly_recurrence": null,
-        "start_time": "18:00:00",
-        "end_time": "21:00:00",
-        "event_image": "",
-        "venue": 3
-    }}
+    {
+        "model": "gigapi.openmic",
+        "pk": 1,
+        "fields": {
+            "event_title": "Artist Night",
+            "user": 1,
+            "recurrence": true,
+            "weekly_recurrence": "Mondays",
+            "monthly_recurrence": null,
+            "start_time": "19:00:00",
+            "end_time": "22:00:00",
+            "event_image": "",
+            "venue": 8
+        }
+    },
+    {
+        "model": "gigapi.openmic",
+        "pk": 2,
+        "fields": {
+            "event_title": "Pitch Meeting",
+            "user": 2,
+            "recurrence": true,
+            "weekly_recurrence": "Tuesdays",
+            "monthly_recurrence": null,
+            "start_time": "18:00:00",
+            "end_time": "21:00:00",
+            "event_image": "",
+            "venue": 10
+        }
+    },
+    {
+        "model": "gigapi.openmic",
+        "pk": 3,
+        "fields": {
+            "event_title": "Tennessee Brew Works Open Mic",
+            "user": 1,
+            "recurrence": true,
+            "weekly_recurrence": "Mondays",
+            "monthly_recurrence": null,
+            "start_time": "18:00:00",
+            "end_time": "20:00:00",
+            "event_image": "",
+            "venue": 13
+        }
+    },
+    {
+        "model": "gigapi.openmic",
+        "pk": 4,
+        "fields": {
+            "event_title": "Bluebird Cafe Open Mic",
+            "user": 2,
+            "recurrence": true,
+            "weekly_recurrence": "Mondays",
+            "monthly_recurrence": null,
+            "start_time": "18:00:00",
+            "end_time": "21:00:00",
+            "event_image": "",
+            "venue": 3
+        }
+    }
 ]
