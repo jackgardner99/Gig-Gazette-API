@@ -9,7 +9,8 @@
             "start_time": "19:00:00",
             "end_time": "22:00:00",
             "venue": 1,
-            "user": 1
+            "user": 1,
+            "ticket_link": "https://ticketmaster.com/jack-holliday-5spot"
         }
     },
     {
@@ -22,7 +23,8 @@
             "start_time": "18:00:00",
             "end_time": "20:30:00",
             "venue": 3,
-            "user": 2
+            "user": 2,
+            "ticket_link": "https://eventbrite.com/kadi-beth-bluebird"
         }
     },
     {
@@ -35,7 +37,8 @@
             "start_time": "20:00:00",
             "end_time": "23:00:00",
             "venue": 2,
-            "user": 1
+            "user": 1,
+            "ticket_link": "https://ticketmaster.com/blue-house-exitin"
         }
     },
     {
@@ -48,7 +51,8 @@
             "start_time": "20:00:00",
             "end_time": "23:30:00",
             "venue": 6,
-            "user": 2
+            "user": 2,
+            "ticket_link": "https://axs.com/downriver-marathon"
         }
     },
     {
@@ -61,7 +65,8 @@
             "start_time": "19:30:00",
             "end_time": "21:30:00",
             "venue": 7,
-            "user": 1
+            "user": 1,
+            "ticket_link": "https://ticketmaster.com/jack-holliday-basement"
         }
     },
     {
@@ -74,7 +79,8 @@
             "start_time": "18:30:00",
             "end_time": "21:00:00",
             "venue": 9,
-            "user": 2
+            "user": 2,
+            "ticket_link": "https://eventbrite.com/kadi-beth-listening-room"
         }
     },
     {
@@ -87,7 +93,8 @@
             "start_time": "20:00:00",
             "end_time": "23:00:00",
             "venue": 5,
-            "user": 1
+            "user": 1,
+            "ticket_link": "https://ticketmaster.com/blue-house-station-inn"
         }
     },
     {
@@ -100,7 +107,8 @@
             "start_time": "17:00:00",
             "end_time": "21:00:00",
             "venue": 8,
-            "user": 2
+            "user": 2,
+            "ticket_link": "https://axs.com/downriver-vinyl-lounge"
         }
     },
     {
@@ -113,7 +121,8 @@
             "start_time": "19:00:00",
             "end_time": "21:00:00",
             "venue": 10,
-            "user": 1
+            "user": 1,
+            "ticket_link": "https://ticketmaster.com/jack-holliday-analog"
         }
     },
     {
@@ -126,7 +135,8 @@
             "start_time": "19:00:00",
             "end_time": "22:30:00",
             "venue": 4,
-            "user": 2
+            "user": 2,
+            "ticket_link": "https://eventbrite.com/kadi-beth-3rd-lindsley"
         }
     }
 ]

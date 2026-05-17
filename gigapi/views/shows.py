@@ -10,7 +10,7 @@ class ShowSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Show
-        fields = ['id', 'user', 'event_title', 'poster_img', 'date', 'start_time', 'end_time', 'venue']
+        fields = ['id', 'user', 'event_title', 'poster_img', 'ticket_link', 'date', 'start_time', 'end_time', 'venue']
 
 
 class ShowViewSet(viewsets.ViewSet):
@@ -47,6 +47,7 @@ class ShowViewSet(viewsets.ViewSet):
             venue=venue,
             event_title=request.data.get('event_title'),
             poster_img=request.data.get('poster_img'),
+            ticket_link=request.data.get('ticket_link'),
             date=request.data.get('date'),
             start_time=request.data.get('start_time'),
             end_time=request.data.get('end_time'),
@@ -70,6 +71,7 @@ class ShowViewSet(viewsets.ViewSet):
 
             show.event_title = request.data.get('event_title', show.event_title)
             show.poster_img = request.data.get('poster_img', show.poster_img)
+            show.ticket_link = request.data.get('ticket_link', show.ticket_link)
             show.date = request.data.get('date', show.date)
             show.start_time = request.data.get('start_time', show.start_time)
             show.end_time = request.data.get('end_time', show.end_time)
