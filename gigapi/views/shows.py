@@ -17,6 +17,9 @@ class ShowViewSet(viewsets.ViewSet):
 
     def list(self, request):
         shows = Show.objects.select_related('venue').all()
+        user_id = request.query_params.get('userId')
+        if user_id:
+            shows = shows.filter(user__id=user_id)
         serializer = ShowSerializer(shows, many=True, context={'request': request})
         return Response(serializer.data)
 
