@@ -26,7 +26,7 @@ class VenueSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Venue
-        fields = ['id', 'name', 'lat', 'lng', 'noise_level', 'parking', 'bar', 'food', 'kid_friendly', 'restaurants', 'venue_image']
+        fields = ['id', 'user', 'name', 'address_number', 'address', 'lat', 'lng', 'noise_level', 'parking', 'bar', 'food', 'kid_friendly', 'restaurants', 'venue_image']
 
 class VenueViewSet(viewsets.ViewSet):
 
@@ -44,16 +44,23 @@ class VenueViewSet(viewsets.ViewSet):
             return Response(status=status.HTTP_404_NOT_FOUND)
 
     def create(self, request):
-        location = request.data.get('location')
-        lat, lng = geocode_location(location) if location else (
-            request.data.get('lat'), request.data.get('lng')
-        )
+        if not request.user.is_authenticated:
+            return Response({'error': 'Authentication required'}, status=status.HTTP_401_UNAUTHORIZED)
 
+        address_number = request.data.get('address_number')
+        address = request.data.get('address')
+        if not address_number or not address:
+            return Response({'error': 'address_number and address are required'}, status=status.HTTP_400_BAD_REQUEST)
+
+        lat, lng = geocode_location(f"{address_number} {address}")
         if lat is None or lng is None:
-            return Response({'error': 'Could not resolve location to coordinates'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'error': 'Could not resolve address to coordinates'}, status=status.HTTP_400_BAD_REQUEST)
 
         venue = Venue.objects.create(
+            user=request.user,
             name=request.data.get('name'),
+            address_number=address_number,
+            address=address,
             lat=lat,
             lng=lng,
             noise_level=request.data.get('noise_level'),
