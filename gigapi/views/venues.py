@@ -103,3 +103,19 @@ class VenueViewSet(viewsets.ViewSet):
 
         except Venue.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
+
+    def destroy(self, request, pk=None):
+        if not request.user.is_authenticated:
+            return Response({'error': 'Authentication required'}, status=status.HTTP_401_UNAUTHORIZED)
+
+        try:
+            venue = Venue.objects.get(pk=pk)
+
+            if venue.user != request.user:
+                return Response({'error': 'You do not own this venue'}, status=status.HTTP_403_FORBIDDEN)
+
+            venue.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+
+        except Venue.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)

@@ -5,9 +5,7 @@
         "fields": {
             "event_title": "Artist Night",
             "user": 1,
-            "recurrence": true,
             "weekly_recurrence": "Mondays",
-            "monthly_recurrence": null,
             "start_time": "19:00:00",
             "end_time": "22:00:00",
             "event_image": "",
@@ -20,9 +18,7 @@
         "fields": {
             "event_title": "Pitch Meeting",
             "user": 2,
-            "recurrence": true,
             "weekly_recurrence": "Tuesdays",
-            "monthly_recurrence": null,
             "start_time": "18:00:00",
             "end_time": "21:00:00",
             "event_image": "",
@@ -35,9 +31,7 @@
         "fields": {
             "event_title": "Tennessee Brew Works Open Mic",
             "user": 1,
-            "recurrence": true,
             "weekly_recurrence": "Mondays",
-            "monthly_recurrence": null,
             "start_time": "18:00:00",
             "end_time": "20:00:00",
             "event_image": "",
@@ -50,9 +44,7 @@
         "fields": {
             "event_title": "Bluebird Cafe Open Mic",
             "user": 2,
-            "recurrence": true,
             "weekly_recurrence": "Mondays",
-            "monthly_recurrence": null,
             "start_time": "18:00:00",
             "end_time": "21:00:00",
             "event_image": "",

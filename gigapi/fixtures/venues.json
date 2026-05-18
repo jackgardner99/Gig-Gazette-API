@@ -4,6 +4,8 @@
         "pk": 1,
         "fields": {
             "name": "The 5 Spot",
+            "address": "Forest Avenue, Nashville, TN",
+            "address_number": "1006",
             "lat": 36.17838,
             "lng": -86.75035,
             "noise_level": "medium",
@@ -18,6 +20,8 @@
         "pk": 2,
         "fields": {
             "name": "Exit/In",
+            "address": "Elliston Pl, Nashville, TN",
+            "address_number": "2208",
             "lat": 36.15133,
             "lng": -86.80433,
             "noise_level": "high",
@@ -32,6 +36,8 @@
         "pk": 3,
         "fields": {
             "name": "The Bluebird Cafe",
+            "address": "Hillsboro Pike, Nashville, TN",
+            "address_number": "4108",
             "lat": 36.10202,
             "lng": -86.81693,
             "noise_level": "low",
@@ -46,6 +52,8 @@
         "pk": 4,
         "fields": {
             "name": "3rd and Lindsley",
+            "address": "Third Ave S, Nashville, TN",
+            "address_number": "818",
             "lat": 36.15218,
             "lng": -86.76983,
             "noise_level": "medium",
@@ -60,6 +68,8 @@
         "pk": 5,
         "fields": {
             "name": "Station Inn",
+            "address": "12th Ave S, Nashville, TN",
+            "address_number": "402",
             "lat": 36.15252,
             "lng": -86.78452,
             "noise_level": "medium",
@@ -74,6 +84,8 @@
         "pk": 6,
         "fields": {
             "name": "Marathon Music Works",
+            "address": "Clinton St, Nashville, TN",
+            "address_number": "1402",
             "lat": 36.16390,
             "lng": -86.79752,
             "noise_level": "high",
@@ -88,6 +100,8 @@
         "pk": 7,
         "fields": {
             "name": "The Basement",
+            "address": "8th Ave S, Nashville, TN",
+            "address_number": "1604",
             "lat": 36.13706,
             "lng": -86.77845,
             "noise_level": "medium",
@@ -102,6 +116,8 @@
         "pk": 8,
         "fields": {
             "name": "The Vinyl Lounge",
+            "address": "Third Ave S, Nashville, TN",
+            "address_number": "1414",
             "lat": 36.14141,
             "lng": -86.76284,
             "noise_level": "medium",
@@ -116,6 +132,8 @@
         "pk": 9,
         "fields": {
             "name": "The Listening Room",
+            "address": "Fourth Ave S, Nashville, TN",
+            "address_number": "618",
             "lat": 36.15375,
             "lng": -86.77228,
             "noise_level": "low",
@@ -130,6 +148,8 @@
         "pk": 10,
         "fields": {
             "name": "Analog",
+            "address": "West End Ave, Nashville, TN",
+            "address_number": "1808",
             "lat": 36.15299,
             "lng": -86.79706,
             "noise_level": "medium",
@@ -144,6 +164,8 @@
         "pk": 11,
         "fields": {
             "name": "The Basement East",
+            "address": "Woodland St, Nashville, TN",
+            "address_number": "917",
             "lat": 36.17568,
             "lng": -86.75562,
             "noise_level": "medium",
@@ -158,6 +180,8 @@
         "pk": 12,
         "fields": {
             "name": "Brooklyn Bowl",
+            "address": "Third Ave N, Nashville, TN",
+            "address_number": "925",
             "lat": 36.17338,
             "lng": -86.78388,
             "noise_level": "high",
@@ -172,6 +196,8 @@
         "pk": 13,
         "fields": {
             "name": "Tennessee Brew Works",
+            "address": "Ewing Ave, Nashville, TN",
+            "address_number": "809",
             "lat": 36.15033,
             "lng": -86.77609,
             "noise_level": "low",
@@ -186,6 +212,8 @@
         "pk": 14,
         "fields": {
             "name": "The Local",
+            "address": "28th Ave N, Nashville, TN",
+            "address_number": "110",
             "lat": 36.14586,
             "lng": -86.81267,
             "noise_level": "low",
@@ -200,6 +228,8 @@
         "pk": 15,
         "fields": {
             "name": "Commodore Grille",
+            "address": "West End Ave, Nashville, TN",
+            "address_number": "2613",
             "lat": 36.14483,
             "lng": -86.81112,
             "noise_level": "low",
@@ -214,6 +244,8 @@
         "pk": 16,
         "fields": {
             "name": "Cambria Hotel",
+            "address": "8th Ave S, Nashville, TN",
+            "address_number": "118",
             "lat": 36.15771,
             "lng": -86.78100,
             "noise_level": "low",
@@ -227,7 +259,9 @@
         "model": "gigapi.venue",
         "pk": 17,
         "fields": {
-            "name": "The Stillery Midtown",
+            "name": "The Stillery",
+            "address": "Broadway, Nashville, TN",
+            "address_number": "1921",
             "lat": 36.14955,
             "lng": -86.79772,
             "noise_level": "low",
@@ -242,6 +276,8 @@
         "pk": 18,
         "fields": {
             "name": "1865 Club",
+            "address": "21st Ave N, Nashville, TN",
+            "address_number": "610",
             "lat": 36.15941,
             "lng": -86.80671,
             "noise_level": "low",
