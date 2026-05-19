@@ -2,6 +2,7 @@ from rest_framework import viewsets, status
 from rest_framework import serializers
 from rest_framework.response import Response
 from gigapi.models import Venue, Restaurant
+import re
 import requests
 
 
@@ -21,6 +22,35 @@ def geocode_location(address_number, address, city, state, country="US"):
     results = response.json()
     if results:
         return float(results[0]["lat"]), float(results[0]["lon"])
+
+    fallback = requests.get(
+        "https://nominatim.openstreetmap.org/search",
+        params={
+            "q": f"{address_number} {address}, {city}, {state}, {country}",
+            "format": "json",
+            "limit": 1,
+        },
+        headers={"User-Agent": "GigGazette/1.0"}
+    )
+    fallback_results = fallback.json()
+    if fallback_results:
+        return float(fallback_results[0]["lat"]), float(fallback_results[0]["lon"])
+
+    numeric_number = re.sub(r'[^0-9]', '', address_number)
+    if numeric_number != address_number:
+        stripped = requests.get(
+            "https://nominatim.openstreetmap.org/search",
+            params={
+                "q": f"{numeric_number} {address}, {city}, {state}, {country}",
+                "format": "json",
+                "limit": 1,
+            },
+            headers={"User-Agent": "GigGazette/1.0"}
+        )
+        stripped_results = stripped.json()
+        if stripped_results:
+            return float(stripped_results[0]["lat"]), float(stripped_results[0]["lon"])
+
     return None, None
 
 class RestaurantSerializer(serializers.ModelSerializer):
