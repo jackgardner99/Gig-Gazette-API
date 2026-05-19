@@ -5,10 +5,17 @@ from gigapi.models import Venue, Restaurant
 import requests
 
 
-def geocode_location(location_string):
+def geocode_location(address_number, address, city, state, country="US"):
     response = requests.get(
         "https://nominatim.openstreetmap.org/search",
-        params={"q": location_string, "format": "json", "limit": 1},
+        params={
+            "street": f"{address_number} {address}",
+            "city": city,
+            "state": state,
+            "country": country,
+            "format": "json",
+            "limit": 1,
+        },
         headers={"User-Agent": "GigGazette/1.0"}
     )
     results = response.json()
@@ -26,7 +33,7 @@ class VenueSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Venue
-        fields = ['id', 'user', 'name', 'address_number', 'address', 'lat', 'lng', 'noise_level', 'parking', 'bar', 'food', 'kid_friendly', 'restaurants', 'venue_image']
+        fields = ['id', 'user', 'name', 'address_number', 'address', 'city', 'state', 'country', 'lat', 'lng', 'noise_level', 'parking', 'bar', 'food', 'kid_friendly', 'restaurants', 'venue_image']
 
 class VenueViewSet(viewsets.ViewSet):
 
@@ -49,10 +56,14 @@ class VenueViewSet(viewsets.ViewSet):
 
         address_number = request.data.get('address_number')
         address = request.data.get('address')
-        if not address_number or not address:
-            return Response({'error': 'address_number and address are required'}, status=status.HTTP_400_BAD_REQUEST)
+        city = request.data.get('city')
+        state = request.data.get('state')
+        country = request.data.get('country', 'US')
 
-        lat, lng = geocode_location(f"{address_number} {address}")
+        if not address_number or not address or not city or not state:
+            return Response({'error': 'address_number, address, city, and state are required'}, status=status.HTTP_400_BAD_REQUEST)
+
+        lat, lng = geocode_location(address_number, address, city, state, country)
         if lat is None or lng is None:
             return Response({'error': 'Could not resolve address to coordinates'}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -61,6 +72,9 @@ class VenueViewSet(viewsets.ViewSet):
             name=request.data.get('name'),
             address_number=address_number,
             address=address,
+            city=city,
+            state=state,
+            country=country,
             lat=lat,
             lng=lng,
             noise_level=request.data.get('noise_level'),
@@ -78,16 +92,25 @@ class VenueViewSet(viewsets.ViewSet):
         try:
             venue = Venue.objects.get(pk=pk)
 
-            location = request.data.get('location')
-            lat, lng = geocode_location(location) if location else (
-                request.data.get('lat', venue.lat),
-                request.data.get('lng', venue.lng)
-            )
+            address_number = request.data.get('address_number', venue.address_number)
+            address = request.data.get('address', venue.address)
+            city = request.data.get('city', venue.city)
+            state = request.data.get('state', venue.state)
+            country = request.data.get('country', venue.country)
 
-            if lat is None or lng is None:
-                return Response({'error': 'Could not resolve location to coordinates'}, status=status.HTTP_400_BAD_REQUEST)
+            if any([request.data.get('address_number'), request.data.get('address'), request.data.get('city'), request.data.get('state')]):
+                lat, lng = geocode_location(address_number, address, city, state, country)
+                if lat is None or lng is None:
+                    return Response({'error': 'Could not resolve address to coordinates'}, status=status.HTTP_400_BAD_REQUEST)
+            else:
+                lat, lng = venue.lat, venue.lng
 
             venue.name = request.data.get('name', venue.name)
+            venue.address_number = address_number
+            venue.address = address
+            venue.city = city
+            venue.state = state
+            venue.country = country
             venue.lat = lat
             venue.lng = lng
             venue.noise_level = request.data.get('noise_level', venue.noise_level)
