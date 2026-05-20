@@ -17,7 +17,7 @@ class OpenMicSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = OpenMic
-        fields = ['id', 'user', 'event_title', 'weekly_recurrence', 'start_time', 'end_time', 'event_image', 'is_owner', 'venue']
+        fields = ['id', 'user', 'event_title', 'recurrence', 'start_time', 'end_time', 'event_image', 'is_owner', 'venue']
 
 
 class OpenMicViewSet(viewsets.ViewSet):
@@ -48,7 +48,7 @@ class OpenMicViewSet(viewsets.ViewSet):
         open_mic = OpenMic.objects.create(
             user=request.user,
             event_title=request.data.get('event_title'),
-            weekly_recurrence=request.data.get('weekly_recurrence'),
+            recurrence=request.data.get('recurrence'),
             start_time=request.data.get('start_time'),
             end_time=request.data.get('end_time'),
             event_image=request.data.get('event_image'),
@@ -72,7 +72,7 @@ class OpenMicViewSet(viewsets.ViewSet):
                 return Response({'error': 'Venue not found'}, status=status.HTTP_400_BAD_REQUEST)
 
             open_mic.event_title = request.data.get('event_title', open_mic.event_title)
-            open_mic.weekly_recurrence = request.data.get('weekly_recurrence', open_mic.weekly_recurrence)
+            open_mic.recurrence = request.data.get('recurrence', open_mic.recurrence)
             open_mic.start_time = request.data.get('start_time', open_mic.start_time)
             open_mic.end_time = request.data.get('end_time', open_mic.end_time)
             open_mic.event_image = request.data.get('event_image', open_mic.event_image)
