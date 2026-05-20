@@ -35,6 +35,12 @@ class ShowViewSet(viewsets.ViewSet):
         if not request.user.is_authenticated:
             return Response({'error': 'Authentication required'}, status=status.HTTP_401_UNAUTHORIZED)
 
+        recurrence = request.data.get('recurrence') or None
+        date = request.data.get('date') or None
+
+        if not recurrence and not date:
+            return Response({'error': 'Either date or recurrence is required'}, status=status.HTTP_400_BAD_REQUEST)
+
         venue_id = request.data.get('venue_id') or request.data.get('venue')
 
         try:
@@ -48,8 +54,8 @@ class ShowViewSet(viewsets.ViewSet):
             event_title=request.data.get('event_title'),
             poster_img=request.data.get('poster_img'),
             ticket_link=request.data.get('ticket_link'),
-            recurrence=request.data.get('recurrence'),
-            date=request.data.get('date'),
+            recurrence=recurrence,
+            date=date,
             start_time=request.data.get('start_time'),
             end_time=request.data.get('end_time'),
         )

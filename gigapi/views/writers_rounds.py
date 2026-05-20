@@ -32,6 +32,7 @@ class WritersRoundViewSet(viewsets.ViewSet):
             return Response({'error': 'Venue not found'}, status=status.HTTP_400_BAD_REQUEST)
 
         writers_round = WritersRound.objects.create(
+            user=request.user,
             venue=venue,
             event_title=request.data.get('event_title'),
             date=request.data.get('date'),
@@ -56,6 +57,9 @@ class WritersRoundViewSet(viewsets.ViewSet):
 
         try:
             writers_round = WritersRound.objects.get(pk=pk)
+
+            if writers_round.user != request.user:
+                return Response({'error': 'You do not own this writers round'}, status=status.HTTP_403_FORBIDDEN)
 
             venue_id = request.data.get('venue_id') or request.data.get('venue')
             try:
@@ -82,6 +86,10 @@ class WritersRoundViewSet(viewsets.ViewSet):
 
         try:
             writers_round = WritersRound.objects.get(pk=pk)
+
+            if writers_round.user != request.user:
+                return Response({'error': 'You do not own this writers round'}, status=status.HTTP_403_FORBIDDEN)
+
             writers_round.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         except WritersRound.DoesNotExist:
