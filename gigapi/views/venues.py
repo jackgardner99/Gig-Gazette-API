@@ -63,7 +63,7 @@ class VenueSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Venue
-        fields = ['id', 'user', 'name', 'address_number', 'address', 'city', 'state', 'country', 'lat', 'lng', 'noise_level', 'parking', 'bar', 'food', 'kid_friendly', 'restaurants', 'venue_image']
+        fields = ['id', 'user', 'name', 'address_number', 'address', 'city', 'state', 'country', 'lat', 'lng', 'noise_level', 'parking', 'bar', 'food', 'kid_friendly', 'seating', 'requires_reservation', 'outdoor', 'beer_only', 'cover_charge', 'restaurants', 'venue_image']
 
 class VenueViewSet(viewsets.ViewSet):
 
@@ -112,6 +112,11 @@ class VenueViewSet(viewsets.ViewSet):
             bar=request.data.get('bar', False),
             food=request.data.get('food', False),
             kid_friendly=request.data.get('kid_friendly', False),
+            seating=request.data.get('seating', False),
+            requires_reservation=request.data.get('requires_reservation', False),
+            outdoor=request.data.get('outdoor', False),
+            beer_only=request.data.get('beer_only', False),
+            cover_charge=request.data.get('cover_charge', False),
             venue_image=request.data.get('venue_image'),
         )
 
@@ -148,6 +153,11 @@ class VenueViewSet(viewsets.ViewSet):
             venue.bar = request.data.get('bar', venue.bar)
             venue.food = request.data.get('food', venue.food)
             venue.kid_friendly = request.data.get('kid_friendly', venue.kid_friendly)
+            venue.seating = request.data.get('seating', venue.seating)
+            venue.requires_reservation = request.data.get('requires_reservation', venue.requires_reservation)
+            venue.outdoor = request.data.get('outdoor', venue.outdoor)
+            venue.beer_only = request.data.get('beer_only', venue.beer_only)
+            venue.cover_charge = request.data.get('cover_charge', venue.cover_charge)
             venue.venue_image = request.data.get('venue_image', venue.venue_image)
             venue.save()
 

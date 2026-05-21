@@ -3,6 +3,7 @@
         "model": "gigapi.venue",
         "pk": 1,
         "fields": {
+            "user": 3,
             "name": "The 5 Spot",
             "address": "Forest Avenue, Nashville, TN",
             "address_number": "1006",
@@ -12,13 +13,19 @@
             "parking": false,
             "bar": true,
             "food": false,
-            "kid_friendly": false
+            "kid_friendly": false,
+            "seating": false,
+            "requires_reservation": false,
+            "outdoor": false,
+            "beer_only": false,
+            "cover_charge": false
         }
     },
     {
         "model": "gigapi.venue",
         "pk": 2,
         "fields": {
+            "user": 3,
             "name": "Exit/In",
             "address": "Elliston Pl, Nashville, TN",
             "address_number": "2208",
@@ -28,13 +35,19 @@
             "parking": true,
             "bar": true,
             "food": false,
-            "kid_friendly": false
+            "kid_friendly": false,
+            "seating": false,
+            "requires_reservation": false,
+            "outdoor": false,
+            "beer_only": false,
+            "cover_charge": false
         }
     },
     {
         "model": "gigapi.venue",
         "pk": 3,
         "fields": {
+            "user": 3,
             "name": "The Bluebird Cafe",
             "address": "Hillsboro Pike, Nashville, TN",
             "address_number": "4108",
@@ -44,13 +57,19 @@
             "parking": true,
             "bar": true,
             "food": true,
-            "kid_friendly": true
+            "kid_friendly": true,
+            "seating": false,
+            "requires_reservation": false,
+            "outdoor": false,
+            "beer_only": false,
+            "cover_charge": false
         }
     },
     {
         "model": "gigapi.venue",
         "pk": 4,
         "fields": {
+            "user": 3,
             "name": "3rd and Lindsley",
             "address": "Third Ave S, Nashville, TN",
             "address_number": "818",
@@ -60,13 +79,19 @@
             "parking": true,
             "bar": true,
             "food": true,
-            "kid_friendly": true
+            "kid_friendly": true,
+            "seating": false,
+            "requires_reservation": false,
+            "outdoor": false,
+            "beer_only": false,
+            "cover_charge": false
         }
     },
     {
         "model": "gigapi.venue",
         "pk": 5,
         "fields": {
+            "user": 3,
             "name": "Station Inn",
             "address": "12th Ave S, Nashville, TN",
             "address_number": "402",
@@ -76,13 +101,19 @@
             "parking": false,
             "bar": true,
             "food": true,
-            "kid_friendly": false
+            "kid_friendly": false,
+            "seating": false,
+            "requires_reservation": false,
+            "outdoor": false,
+            "beer_only": false,
+            "cover_charge": false
         }
     },
     {
         "model": "gigapi.venue",
         "pk": 6,
         "fields": {
+            "user": 3,
             "name": "Marathon Music Works",
             "address": "Clinton St, Nashville, TN",
             "address_number": "1402",
@@ -92,13 +123,19 @@
             "parking": true,
             "bar": true,
             "food": false,
-            "kid_friendly": false
+            "kid_friendly": false,
+            "seating": false,
+            "requires_reservation": false,
+            "outdoor": false,
+            "beer_only": false,
+            "cover_charge": false
         }
     },
     {
         "model": "gigapi.venue",
         "pk": 7,
         "fields": {
+            "user": 3,
             "name": "The Basement",
             "address": "8th Ave S, Nashville, TN",
             "address_number": "1604",
@@ -108,13 +145,19 @@
             "parking": false,
             "bar": true,
             "food": false,
-            "kid_friendly": false
+            "kid_friendly": false,
+            "seating": false,
+            "requires_reservation": false,
+            "outdoor": false,
+            "beer_only": false,
+            "cover_charge": false
         }
     },
     {
         "model": "gigapi.venue",
         "pk": 8,
         "fields": {
+            "user": 3,
             "name": "The Vinyl Lounge",
             "address": "Third Ave S, Nashville, TN",
             "address_number": "1414",
@@ -124,13 +167,19 @@
             "parking": true,
             "bar": true,
             "food": true,
-            "kid_friendly": true
+            "kid_friendly": true,
+            "seating": false,
+            "requires_reservation": false,
+            "outdoor": false,
+            "beer_only": false,
+            "cover_charge": false
         }
     },
     {
         "model": "gigapi.venue",
         "pk": 9,
         "fields": {
+            "user": 3,
             "name": "The Listening Room",
             "address": "Fourth Ave S, Nashville, TN",
             "address_number": "618",
@@ -140,13 +189,19 @@
             "parking": false,
             "bar": true,
             "food": true,
-            "kid_friendly": true
+            "kid_friendly": true,
+            "seating": false,
+            "requires_reservation": false,
+            "outdoor": false,
+            "beer_only": false,
+            "cover_charge": false
         }
     },
     {
         "model": "gigapi.venue",
         "pk": 10,
         "fields": {
+            "user": 3,
             "name": "Analog",
             "address": "West End Ave, Nashville, TN",
             "address_number": "1808",
@@ -156,13 +211,19 @@
             "parking": false,
             "bar": true,
             "food": false,
-            "kid_friendly": true
+            "kid_friendly": true,
+            "seating": false,
+            "requires_reservation": false,
+            "outdoor": false,
+            "beer_only": false,
+            "cover_charge": false
         }
     },
     {
         "model": "gigapi.venue",
         "pk": 11,
         "fields": {
+            "user": 3,
             "name": "The Basement East",
             "address": "Woodland St, Nashville, TN",
             "address_number": "917",
@@ -172,13 +233,19 @@
             "parking": true,
             "bar": true,
             "food": false,
-            "kid_friendly": true
+            "kid_friendly": true,
+            "seating": false,
+            "requires_reservation": false,
+            "outdoor": false,
+            "beer_only": false,
+            "cover_charge": false
         }
     },
     {
         "model": "gigapi.venue",
         "pk": 12,
         "fields": {
+            "user": 3,
             "name": "Brooklyn Bowl",
             "address": "Third Ave N, Nashville, TN",
             "address_number": "925",
@@ -188,13 +255,19 @@
             "parking": false,
             "bar": true,
             "food": true,
-            "kid_friendly": false
+            "kid_friendly": false,
+            "seating": false,
+            "requires_reservation": false,
+            "outdoor": false,
+            "beer_only": false,
+            "cover_charge": false
         }
     },
     {
         "model": "gigapi.venue",
         "pk": 13,
         "fields": {
+            "user": 3,
             "name": "Tennessee Brew Works",
             "address": "Ewing Ave, Nashville, TN",
             "address_number": "809",
@@ -204,13 +277,19 @@
             "parking": false,
             "bar": true,
             "food": true,
-            "kid_friendly": true
+            "kid_friendly": true,
+            "seating": false,
+            "requires_reservation": false,
+            "outdoor": false,
+            "beer_only": false,
+            "cover_charge": false
         }
     },
     {
         "model": "gigapi.venue",
         "pk": 14,
         "fields": {
+            "user": 3,
             "name": "The Local",
             "address": "28th Ave N, Nashville, TN",
             "address_number": "110",
@@ -220,13 +299,19 @@
             "parking": false,
             "bar": true,
             "food": true,
-            "kid_friendly": true
+            "kid_friendly": true,
+            "seating": false,
+            "requires_reservation": false,
+            "outdoor": false,
+            "beer_only": false,
+            "cover_charge": false
         }
     },
     {
         "model": "gigapi.venue",
         "pk": 15,
         "fields": {
+            "user": 3,
             "name": "Commodore Grille",
             "address": "West End Ave, Nashville, TN",
             "address_number": "2613",
@@ -236,13 +321,19 @@
             "parking": true,
             "bar": true,
             "food": true,
-            "kid_friendly": true
+            "kid_friendly": true,
+            "seating": false,
+            "requires_reservation": false,
+            "outdoor": false,
+            "beer_only": false,
+            "cover_charge": false
         }
     },
     {
         "model": "gigapi.venue",
         "pk": 16,
         "fields": {
+            "user": 3,
             "name": "Cambria Hotel",
             "address": "8th Ave S, Nashville, TN",
             "address_number": "118",
@@ -252,13 +343,19 @@
             "parking": true,
             "bar": true,
             "food": true,
-            "kid_friendly": true
+            "kid_friendly": true,
+            "seating": false,
+            "requires_reservation": false,
+            "outdoor": false,
+            "beer_only": false,
+            "cover_charge": false
         }
     },
     {
         "model": "gigapi.venue",
         "pk": 17,
         "fields": {
+            "user": 3,
             "name": "The Stillery",
             "address": "Broadway, Nashville, TN",
             "address_number": "1921",
@@ -268,13 +365,19 @@
             "parking": false,
             "bar": true,
             "food": true,
-            "kid_friendly": true
+            "kid_friendly": true,
+            "seating": false,
+            "requires_reservation": false,
+            "outdoor": false,
+            "beer_only": false,
+            "cover_charge": false
         }
     },
     {
         "model": "gigapi.venue",
         "pk": 18,
         "fields": {
+            "user": 3,
             "name": "1865 Club",
             "address": "21st Ave N, Nashville, TN",
             "address_number": "610",
@@ -284,7 +387,12 @@
             "parking": false,
             "bar": true,
             "food": false,
-            "kid_friendly": true
+            "kid_friendly": true,
+            "seating": false,
+            "requires_reservation": false,
+            "outdoor": false,
+            "beer_only": false,
+            "cover_charge": false
         }
     }
 ]
