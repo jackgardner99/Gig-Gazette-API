@@ -1,9 +1,10 @@
-from django.contrib import admin
+from django.conf import settings
+from django.conf.urls.static import static
 from django.urls import include, path
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import routers
-from rest_framework.authtoken.views import obtain_auth_token
-from gigapi.views import ClientViewSet, GenreViewSet, ArtistViewSet, VenueViewSet, OpenMicViewSet, ShowViewSet, Users, WritersRoundViewSet
+
+from gigapi.views import ArtistViewSet, ClientViewSet, GenreViewSet, OpenMicViewSet, ShowViewSet, Users, VenueViewSet, WritersRoundViewSet
 
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'clients', ClientViewSet, 'client')
@@ -18,6 +19,5 @@ router.register(r'writers_rounds', WritersRoundViewSet, 'writers_round')
 urlpatterns = [
     path('', include(router.urls)),
     path('login', csrf_exempt(Users.as_view({'post': 'login_user'}))),
-    path('register', csrf_exempt(Users.as_view({'post': 'register'})))
-]
-
+    path('register', csrf_exempt(Users.as_view({'post': 'register'}))),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

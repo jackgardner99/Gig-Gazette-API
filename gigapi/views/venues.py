@@ -7,6 +7,14 @@ from rest_framework.response import Response
 from gigapi.models import Restaurant, Venue
 
 
+def parse_bool(value, default=False):
+    if isinstance(value, bool):
+        return value
+    if isinstance(value, str):
+        return value.lower() in ('true', '1', 'yes')
+    return default
+
+
 def geocode_location(address_number, address, city, state, country="US"):
     response = requests.get(
         "https://nominatim.openstreetmap.org/search",
@@ -112,15 +120,15 @@ class VenueViewSet(viewsets.ViewSet):
             lat=lat,
             lng=lng,
             noise_level=request.data.get('noise_level'),
-            parking=request.data.get('parking', False),
-            bar=request.data.get('bar', False),
-            food=request.data.get('food', False),
-            kid_friendly=request.data.get('kid_friendly', False),
-            seating=request.data.get('seating', False),
-            requires_reservation=request.data.get('requires_reservation', False),
-            outdoor=request.data.get('outdoor', False),
-            beer_only=request.data.get('beer_only', False),
-            cover_charge=request.data.get('cover_charge', False),
+            parking=parse_bool(request.data.get('parking', False)),
+            bar=parse_bool(request.data.get('bar', False)),
+            food=parse_bool(request.data.get('food', False)),
+            kid_friendly=parse_bool(request.data.get('kid_friendly', False)),
+            seating=parse_bool(request.data.get('seating', False)),
+            requires_reservation=parse_bool(request.data.get('requires_reservation', False)),
+            outdoor=parse_bool(request.data.get('outdoor', False)),
+            beer_only=parse_bool(request.data.get('beer_only', False)),
+            cover_charge=parse_bool(request.data.get('cover_charge', False)),
             venue_image=request.data.get('venue_image'),
         )
 
@@ -161,15 +169,15 @@ class VenueViewSet(viewsets.ViewSet):
             venue.lat = lat
             venue.lng = lng
             venue.noise_level = request.data.get('noise_level', venue.noise_level)
-            venue.parking = request.data.get('parking', venue.parking)
-            venue.bar = request.data.get('bar', venue.bar)
-            venue.food = request.data.get('food', venue.food)
-            venue.kid_friendly = request.data.get('kid_friendly', venue.kid_friendly)
-            venue.seating = request.data.get('seating', venue.seating)
-            venue.requires_reservation = request.data.get('requires_reservation', venue.requires_reservation)
-            venue.outdoor = request.data.get('outdoor', venue.outdoor)
-            venue.beer_only = request.data.get('beer_only', venue.beer_only)
-            venue.cover_charge = request.data.get('cover_charge', venue.cover_charge)
+            venue.parking = parse_bool(request.data.get('parking', venue.parking))
+            venue.bar = parse_bool(request.data.get('bar', venue.bar))
+            venue.food = parse_bool(request.data.get('food', venue.food))
+            venue.kid_friendly = parse_bool(request.data.get('kid_friendly', venue.kid_friendly))
+            venue.seating = parse_bool(request.data.get('seating', venue.seating))
+            venue.requires_reservation = parse_bool(request.data.get('requires_reservation', venue.requires_reservation))
+            venue.outdoor = parse_bool(request.data.get('outdoor', venue.outdoor))
+            venue.beer_only = parse_bool(request.data.get('beer_only', venue.beer_only))
+            venue.cover_charge = parse_bool(request.data.get('cover_charge', venue.cover_charge))
             venue.venue_image = request.data.get('venue_image', venue.venue_image)
             venue.save()
 
