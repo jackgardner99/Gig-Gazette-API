@@ -1,9 +1,10 @@
-from rest_framework import viewsets, status
-from rest_framework import serializers
-from rest_framework.response import Response
-from gigapi.models import Venue, Restaurant
 import re
+
 import requests
+from rest_framework import serializers, status, viewsets
+from rest_framework.response import Response
+
+from gigapi.models import Restaurant, Venue
 
 
 def geocode_location(address_number, address, city, state, country="US"):
@@ -17,7 +18,8 @@ def geocode_location(address_number, address, city, state, country="US"):
             "format": "json",
             "limit": 1,
         },
-        headers={"User-Agent": "GigGazette/1.0"}
+        headers={"User-Agent": "GigGazette/1.0"},
+        timeout=5,
     )
     results = response.json()
     if results:
@@ -30,7 +32,8 @@ def geocode_location(address_number, address, city, state, country="US"):
             "format": "json",
             "limit": 1,
         },
-        headers={"User-Agent": "GigGazette/1.0"}
+        headers={"User-Agent": "GigGazette/1.0"},
+        timeout=5,
     )
     fallback_results = fallback.json()
     if fallback_results:
@@ -45,7 +48,8 @@ def geocode_location(address_number, address, city, state, country="US"):
                 "format": "json",
                 "limit": 1,
             },
-            headers={"User-Agent": "GigGazette/1.0"}
+            headers={"User-Agent": "GigGazette/1.0"},
+            timeout=5,
         )
         stripped_results = stripped.json()
         if stripped_results:
@@ -63,7 +67,7 @@ class VenueSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Venue
-        fields = ['id', 'user', 'name', 'address_number', 'address', 'city', 'state', 'country', 'lat', 'lng', 'noise_level', 'parking', 'bar', 'food', 'kid_friendly', 'restaurants', 'venue_image']
+        fields = ['id', 'user', 'name', 'address_number', 'address', 'city', 'state', 'country', 'lat', 'lng', 'noise_level', 'parking', 'bar', 'food', 'kid_friendly', 'seating', 'requires_reservation', 'outdoor', 'beer_only', 'cover_charge', 'restaurants', 'venue_image']
 
 class VenueViewSet(viewsets.ViewSet):
 
@@ -112,6 +116,11 @@ class VenueViewSet(viewsets.ViewSet):
             bar=request.data.get('bar', False),
             food=request.data.get('food', False),
             kid_friendly=request.data.get('kid_friendly', False),
+            seating=request.data.get('seating', False),
+            requires_reservation=request.data.get('requires_reservation', False),
+            outdoor=request.data.get('outdoor', False),
+            beer_only=request.data.get('beer_only', False),
+            cover_charge=request.data.get('cover_charge', False),
             venue_image=request.data.get('venue_image'),
         )
 
@@ -128,7 +137,15 @@ class VenueViewSet(viewsets.ViewSet):
             state = request.data.get('state', venue.state)
             country = request.data.get('country', venue.country)
 
-            if any([request.data.get('address_number'), request.data.get('address'), request.data.get('city'), request.data.get('state')]):
+            address_changed = (
+                address_number != venue.address_number or
+                address != venue.address or
+                city != venue.city or
+                state != venue.state or
+                country != venue.country
+            )
+
+            if address_changed:
                 lat, lng = geocode_location(address_number, address, city, state, country)
                 if lat is None or lng is None:
                     return Response({'error': 'Could not resolve address to coordinates'}, status=status.HTTP_400_BAD_REQUEST)
@@ -148,6 +165,11 @@ class VenueViewSet(viewsets.ViewSet):
             venue.bar = request.data.get('bar', venue.bar)
             venue.food = request.data.get('food', venue.food)
             venue.kid_friendly = request.data.get('kid_friendly', venue.kid_friendly)
+            venue.seating = request.data.get('seating', venue.seating)
+            venue.requires_reservation = request.data.get('requires_reservation', venue.requires_reservation)
+            venue.outdoor = request.data.get('outdoor', venue.outdoor)
+            venue.beer_only = request.data.get('beer_only', venue.beer_only)
+            venue.cover_charge = request.data.get('cover_charge', venue.cover_charge)
             venue.venue_image = request.data.get('venue_image', venue.venue_image)
             venue.save()
 

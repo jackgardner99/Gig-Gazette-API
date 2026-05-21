@@ -17,6 +17,11 @@ class Venue(models.Model):
     bar = models.BooleanField(default=False)
     food = models.BooleanField(default=False)
     kid_friendly = models.BooleanField(default=False)
+    seating = models.BooleanField(default=False)
+    requires_reservation = models.BooleanField(default=False)
+    outdoor = models.BooleanField(default=False)
+    beer_only = models.BooleanField(default=False)
+    cover_charge = models.BooleanField(default=False)
     venue_image = models.ImageField(upload_to="venues/", blank=True, null=True)
 
     class Meta:
