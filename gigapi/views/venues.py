@@ -1,9 +1,10 @@
-from rest_framework import viewsets, status
-from rest_framework import serializers
-from rest_framework.response import Response
-from gigapi.models import Venue, Restaurant
 import re
+
 import requests
+from rest_framework import serializers, status, viewsets
+from rest_framework.response import Response
+
+from gigapi.models import Restaurant, Venue
 
 
 def geocode_location(address_number, address, city, state, country="US"):
@@ -17,7 +18,8 @@ def geocode_location(address_number, address, city, state, country="US"):
             "format": "json",
             "limit": 1,
         },
-        headers={"User-Agent": "GigGazette/1.0"}
+        headers={"User-Agent": "GigGazette/1.0"},
+        timeout=5,
     )
     results = response.json()
     if results:
@@ -30,7 +32,8 @@ def geocode_location(address_number, address, city, state, country="US"):
             "format": "json",
             "limit": 1,
         },
-        headers={"User-Agent": "GigGazette/1.0"}
+        headers={"User-Agent": "GigGazette/1.0"},
+        timeout=5,
     )
     fallback_results = fallback.json()
     if fallback_results:
@@ -45,7 +48,8 @@ def geocode_location(address_number, address, city, state, country="US"):
                 "format": "json",
                 "limit": 1,
             },
-            headers={"User-Agent": "GigGazette/1.0"}
+            headers={"User-Agent": "GigGazette/1.0"},
+            timeout=5,
         )
         stripped_results = stripped.json()
         if stripped_results:
@@ -133,7 +137,15 @@ class VenueViewSet(viewsets.ViewSet):
             state = request.data.get('state', venue.state)
             country = request.data.get('country', venue.country)
 
-            if any([request.data.get('address_number'), request.data.get('address'), request.data.get('city'), request.data.get('state')]):
+            address_changed = (
+                address_number != venue.address_number or
+                address != venue.address or
+                city != venue.city or
+                state != venue.state or
+                country != venue.country
+            )
+
+            if address_changed:
                 lat, lng = geocode_location(address_number, address, city, state, country)
                 if lat is None or lng is None:
                     return Response({'error': 'Could not resolve address to coordinates'}, status=status.HTTP_400_BAD_REQUEST)
