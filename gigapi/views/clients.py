@@ -11,19 +11,19 @@ class ClientSerializer(serializers.ModelSerializer):
     genre = GenreSerializer()
 
     def get_is_owner(self, obj):
-        # Check if the authenticated user is the owner
-        return self.context['request'].user == obj.user
+        request = self.context['request']
+        if not request.user.is_authenticated:
+            return False
+        return request.user == obj.user
     
     class Meta:
         model = Client
-        fields = ['id', 'user', 'client_name', 'is_band', 'genre', 'is_owner', 'artists']
+        fields = ['id', 'user', 'client_name', 'is_band', 'genre', 'is_owner', 'artists', 'client_image']
 
 class ClientWriteSerializer(serializers.ModelSerializer):
-    artists = serializers.ListField(child=serializers.PrimaryKeyRelatedField(queryset=Artist.objects.all()), required=False)
-
     class Meta:
         model = Client
-        fields = ['client_name', 'user', 'is_band', 'genre', 'is_owner', 'artists']
+        fields = ['client_name', 'is_band']
 
 
 class ClientViewSet(viewsets.ViewSet):
@@ -45,7 +45,8 @@ class ClientViewSet(viewsets.ViewSet):
         # Get the data from the client's JSON payload
         client_name = request.data.get('client_name')
         is_band = request.data.get('is_band')
-        genre_id = request.data.get('genre_id')
+        genre_id = request.data.get('genre')
+        client_image = request.data.get('client_image')
 
         try:
             genre = Genre.objects.get(pk=genre_id)
@@ -56,7 +57,8 @@ class ClientViewSet(viewsets.ViewSet):
             user=request.user,
             client_name=client_name,
             is_band=is_band,
-            genre=genre
+            genre=genre,
+            client_image=client_image
         )
 
         # Establish the many-to-many relationships
@@ -75,7 +77,7 @@ class ClientViewSet(viewsets.ViewSet):
 
             serializer = ClientWriteSerializer(data=request.data)
             if serializer.is_valid():
-                genre_id = request.data.get('genre_id')
+                genre_id = request.data.get('genre_id') or request.data.get('genre')
                 try:
                     genre = Genre.objects.get(pk=genre_id)
                 except Genre.DoesNotExist:
@@ -83,6 +85,7 @@ class ClientViewSet(viewsets.ViewSet):
 
                 client.client_name = serializer.validated_data['client_name']
                 client.is_band = serializer.validated_data['is_band']
+                client.client_image = serializer.validated_data['client_image']
                 client.genre = genre
                 client.save()
 
@@ -100,9 +103,14 @@ class ClientViewSet(viewsets.ViewSet):
     def destroy(self, request, pk=None):
         try:
             client = Client.objects.get(pk=pk)
-            self.check_object_permissions(request, client)
-            client.delete()
+            if client.user.id == request.auth.user.id:
 
-            return Response(status=status.HTTP_204_NO_CONTENT)
+                self.check_object_permissions(request, client)
+                client.delete()
+            
+                return Response(status=status.HTTP_204_NO_CONTENT)
+            else: 
+                return Response({'message': 'You do not own that client'}, status=status.HTTP_403_FORBIDDEN)
+
         except Client.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)

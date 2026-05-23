@@ -1,16 +1,16 @@
 from django.db import models
 from django.contrib.auth.models import User
+from .venue import Venue
 
 
 class OpenMic(models.Model):
     event_title = models.CharField(max_length=255)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="open_mics")
-    recurrence = models.BooleanField(default=False)
-    weekly_recurrence = models.CharField(max_length=255, blank=True, null=True)
-    monthly_recurrence = models.CharField(max_length=255, blank=True, null=True)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, related_name="open_mics", null=True, blank=True)
+    recurrence = models.CharField(max_length=255, blank=True, null=True)
     start_time = models.TimeField()
     end_time = models.TimeField()
     event_image = models.ImageField(upload_to="open_mics/", blank=True, null=True)
+    venue = models.ForeignKey(Venue, on_delete=models.CASCADE, related_name="open_mics")
 
     class Meta:
         db_table = "open_mics"

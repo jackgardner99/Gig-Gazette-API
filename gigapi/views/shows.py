@@ -2,104 +2,103 @@ from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework import serializers
 from gigapi.models import Show
-from .clients import Client, ClientSerializer
+from .venues import Venue, VenueSerializer
+
 
 class ShowSerializer(serializers.ModelSerializer):
-    is_owner = serializers.SerializerMethodField()
-    client = ClientSerializer()
-
-    def get_is_owner(self, obj):
-        # Check if the authenticated user is the owner
-        return self.context['request'].user == obj.user
-    
-    class Meta:
-        model = Show
-        fields = ['id', 'client', 'is_owner', 'event_title', 'poster_img', 'date', 'start_time', 'end_time']
-
-class ShowWriteSerializer(serializers.ModelSerializer):
-    client = serializers.ListField(child=serializers.PrimaryKeyRelatedField(queryset=Client.objects.all()), required=False)
+    venue = VenueSerializer()
 
     class Meta:
         model = Show
-        fields = ['client', 'event_title', 'poster_img', 'date', 'start_time', 'end_time']
+        fields = ['id', 'user', 'event_title', 'poster_img', 'ticket_link', 'recurrence', 'date', 'start_time', 'end_time', 'venue']
 
 
 class ShowViewSet(viewsets.ViewSet):
 
     def list(self, request):
-        shows = Show.objects.all()
+        shows = Show.objects.select_related('venue').all()
+        user_id = request.query_params.get('userId')
+        if user_id:
+            shows = shows.filter(user__id=user_id)
         serializer = ShowSerializer(shows, many=True, context={'request': request})
         return Response(serializer.data)
-    
+
     def retrieve(self, request, pk=None):
         try:
-            show= Show.objects.get(pk=pk)
+            show = Show.objects.select_related('venue').get(pk=pk)
             serializer = ShowSerializer(show, context={'request': request})
             return Response(serializer.data)
         except Show.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
-        
+
     def create(self, request):
-        # Get the data from the client's JSON payload
-        client_id = request.data.get('client_id')
-        poster_img = request.data.get('poster_img')
-        date = request.data.get('date')
-        start_time = request.data.get('start_time')
-        end_time = request.data.get('end_time')
+        if not request.user.is_authenticated:
+            return Response({'error': 'Authentication required'}, status=status.HTTP_401_UNAUTHORIZED)
+
+        recurrence = request.data.get('recurrence') or None
+        date = request.data.get('date') or None
+
+        if not recurrence and not date:
+            return Response({'error': 'Either date or recurrence is required'}, status=status.HTTP_400_BAD_REQUEST)
+
+        venue_id = request.data.get('venue_id') or request.data.get('venue')
 
         try:
-            client = Client.objects.get(pk=client_id)
-        except Client.DoesNotExist:
-            return Response({'error': 'Client not found'}, status=status.HTTP_400_BAD_REQUEST)
+            venue = Venue.objects.get(pk=venue_id)
+        except Venue.DoesNotExist:
+            return Response({'error': 'Venue not found'}, status=status.HTTP_400_BAD_REQUEST)
 
         show = Show.objects.create(
-            client=client,
-            poster_img=poster_img,
+            user=request.user,
+            venue=venue,
+            event_title=request.data.get('event_title'),
+            poster_img=request.data.get('poster_img'),
+            ticket_link=request.data.get('ticket_link'),
+            recurrence=recurrence,
             date=date,
-            start_time=start_time,
-            end_time=end_time
+            start_time=request.data.get('start_time'),
+            end_time=request.data.get('end_time'),
         )
 
         serializer = ShowSerializer(show, context={'request': request})
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def update(self, request, pk=None):
-        try:
+        if not request.user.is_authenticated:
+            return Response({'error': 'Authentication required'}, status=status.HTTP_401_UNAUTHORIZED)
 
+        try:
             show = Show.objects.get(pk=pk)
 
-            self.check_object_permissions(request, show)
+            venue_id = request.data.get('venue_id') or request.data.get('venue')
+            try:
+                venue = Venue.objects.get(pk=venue_id)
+            except Venue.DoesNotExist:
+                return Response({'error': 'Venue not found'}, status=status.HTTP_400_BAD_REQUEST)
 
-            serializer = ShowWriteSerializer(data=request.data)
-            if serializer.is_valid():
-                client_id = request.data.get('client_id')
-                try:
-                    client = Client.objects.get(pk=client_id)
-                except Client.DoesNotExist:
-                    return Response({'error': 'Genre not found'}, status=status.HTTP_400_BAD_REQUEST)
+            show.event_title = request.data.get('event_title', show.event_title)
+            show.poster_img = request.data.get('poster_img', show.poster_img)
+            show.ticket_link = request.data.get('ticket_link', show.ticket_link)
+            show.recurrence = request.data.get('recurrence', show.recurrence)
+            show.date = request.data.get('date', show.date)
+            show.start_time = request.data.get('start_time', show.start_time)
+            show.end_time = request.data.get('end_time', show.end_time)
+            show.venue = venue
+            show.save()
 
-                show.event_title = serializer.validated_data['event_title']
-                show.poster_img = serializer.validated_data['poster_img']
-                show.client = client
-                show.date = serializer.validated_data['date']
-                show.start_time = serializer.validated_data['start_time']
-                show.end_time = serializer.validated_data['end_time']
-                show.save()
+            serializer = ShowSerializer(show, context={'request': request})
+            return Response(serializer.data, status=status.HTTP_200_OK)
 
-                serializer = ShowSerializer(show, context={'request': request})
-                return Response(status=status.HTTP_204_NO_CONTENT)
-            
-            return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
-        
         except Show.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
-        
+
     def destroy(self, request, pk=None):
+        if not request.user.is_authenticated:
+            return Response({'error': 'Authentication required'}, status=status.HTTP_401_UNAUTHORIZED)
+
         try:
             show = Show.objects.get(pk=pk)
-            self.check_object_permissions(request, show)
             show.delete()
-
             return Response(status=status.HTTP_204_NO_CONTENT)
         except Show.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)

@@ -1,0 +1,142 @@
+[
+    {
+        "model": "gigapi.show",
+        "pk": 1,
+        "fields": {
+            "event_title": "Jack Holliday Live at the 5 Spot",
+            "poster_img": "",
+            "date": "2026-05-10",
+            "start_time": "19:00:00",
+            "end_time": "22:00:00",
+            "venue": 1,
+            "user": 1,
+            "ticket_link": "https://ticketmaster.com/jack-holliday-5spot"
+        }
+    },
+    {
+        "model": "gigapi.show",
+        "pk": 2,
+        "fields": {
+            "event_title": "Kadi Beth at The Bluebird Cafe",
+            "poster_img": "",
+            "date": "2026-05-14",
+            "start_time": "18:00:00",
+            "end_time": "20:30:00",
+            "venue": 3,
+            "user": 2,
+            "ticket_link": "https://eventbrite.com/kadi-beth-bluebird"
+        }
+    },
+    {
+        "model": "gigapi.show",
+        "pk": 3,
+        "fields": {
+            "event_title": "The Blue House Band at Exit/In",
+            "poster_img": "",
+            "date": "2026-05-17",
+            "start_time": "20:00:00",
+            "end_time": "23:00:00",
+            "venue": 2,
+            "user": 1,
+            "ticket_link": "https://ticketmaster.com/blue-house-exitin"
+        }
+    },
+    {
+        "model": "gigapi.show",
+        "pk": 4,
+        "fields": {
+            "event_title": "Downriver Collective at Marathon Music Works",
+            "poster_img": "",
+            "date": "2026-05-21",
+            "start_time": "20:00:00",
+            "end_time": "23:30:00",
+            "venue": 6,
+            "user": 2,
+            "ticket_link": "https://axs.com/downriver-marathon"
+        }
+    },
+    {
+        "model": "gigapi.show",
+        "pk": 5,
+        "fields": {
+            "event_title": "Jack Holliday at The Basement",
+            "poster_img": "",
+            "date": "2026-05-24",
+            "start_time": "19:30:00",
+            "end_time": "21:30:00",
+            "venue": 7,
+            "user": 1,
+            "ticket_link": "https://ticketmaster.com/jack-holliday-basement"
+        }
+    },
+    {
+        "model": "gigapi.show",
+        "pk": 6,
+        "fields": {
+            "event_title": "Kadi Beth at The Listening Room Cafe",
+            "poster_img": "",
+            "date": "2026-05-28",
+            "start_time": "18:30:00",
+            "end_time": "21:00:00",
+            "venue": 9,
+            "user": 2,
+            "ticket_link": "https://eventbrite.com/kadi-beth-listening-room"
+        }
+    },
+    {
+        "model": "gigapi.show",
+        "pk": 7,
+        "fields": {
+            "event_title": "The Blue House Band at Station Inn",
+            "poster_img": "",
+            "date": "2026-06-03",
+            "start_time": "20:00:00",
+            "end_time": "23:00:00",
+            "venue": 5,
+            "user": 1,
+            "ticket_link": "https://ticketmaster.com/blue-house-station-inn"
+        }
+    },
+    {
+        "model": "gigapi.show",
+        "pk": 8,
+        "fields": {
+            "event_title": "Downriver Collective at the Vinyl Lounge",
+            "poster_img": "",
+            "date": "2026-06-07",
+            "start_time": "17:00:00",
+            "end_time": "21:00:00",
+            "venue": 8,
+            "user": 2,
+            "ticket_link": "https://axs.com/downriver-vinyl-lounge"
+        }
+    },
+    {
+        "model": "gigapi.show",
+        "pk": 9,
+        "fields": {
+            "event_title": "Jack Holliday at Analog",
+            "poster_img": "",
+            "date": "2026-06-12",
+            "start_time": "19:00:00",
+            "end_time": "21:00:00",
+            "venue": 10,
+            "user": 1,
+            "ticket_link": "https://ticketmaster.com/jack-holliday-analog"
+        }
+    },
+    {
+        "model": "gigapi.show",
+        "pk": 10,
+        "fields": {
+            "event_title": "Kadi Beth at 3rd and Lindsley",
+            "poster_img": "",
+            "date": "2026-06-20",
+            "start_time": "19:00:00",
+            "end_time": "22:30:00",
+            "venue": 4,
+            "user": 2,
+            "ticket_link": "https://eventbrite.com/kadi-beth-3rd-lindsley"
+        }
+    }
+]

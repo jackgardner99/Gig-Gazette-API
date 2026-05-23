@@ -10,6 +10,7 @@ class Client(models.Model):
     is_band = models.BooleanField(default=False)
     genre = models.ForeignKey(Genre, on_delete=models.SET_NULL, null=True, blank=True, related_name="clients")
     artists = models.ManyToManyField(Artist, related_name="artists")
+    client_image = models.ImageField(upload_to="clients/", blank=True, null=True)
 
     class Meta:
         db_table = "clients"
