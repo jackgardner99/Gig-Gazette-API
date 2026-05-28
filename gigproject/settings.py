@@ -41,19 +41,21 @@ REST_FRAMEWORK = {
     ],
 }
 
-CORS_ORIGIN_WHITELIST = (
+_cors_origins = os.environ.get('CORS_ORIGIN_WHITELIST', '')
+CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
     'http://127.0.0.1:3000',
     'http://localhost:5173',
     'http://127.0.0.1:5173',
-)
+] + [origin for origin in _cors_origins.split(',') if origin]
 
+_csrf_origins = os.environ.get('CSRF_TRUSTED_ORIGINS', '')
 CSRF_TRUSTED_ORIGINS = [
     'http://localhost:3000',
     'http://127.0.0.1:3000',
     'http://localhost:5173',
     'http://127.0.0.1:5173',
-]
+] + [origin for origin in _csrf_origins.split(',') if origin]
 
 
 MIDDLEWARE = [
