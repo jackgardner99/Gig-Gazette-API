@@ -15,51 +15,41 @@ def parse_bool(value, default=False):
     return default
 
 
-def geocode_location(address_number, address, city, state, country="US"):
+NOMINATIM_USER_AGENT = "GigGazette/1.0 (jtgardner99@gmail.com)"
+
+
+def _nominatim_get(params):
     response = requests.get(
         "https://nominatim.openstreetmap.org/search",
-        params={
-            "street": f"{address_number} {address}",
-            "city": city,
-            "state": state,
-            "country": country,
-            "format": "json",
-            "limit": 1,
-        },
-        headers={"User-Agent": "GigGazette/1.0"},
-        timeout=5,
+        params={**params, "format": "json", "limit": 1},
+        headers={"User-Agent": NOMINATIM_USER_AGENT},
+        timeout=10,
     )
-    results = response.json()
+    response.raise_for_status()
+    return response.json()
+
+
+def geocode_location(address_number, address, city, state, country="US"):
+    results = _nominatim_get({
+        "street": f"{address_number} {address}",
+        "city": city,
+        "state": state,
+        "country": country,
+    })
     if results:
         return float(results[0]["lat"]), float(results[0]["lon"])
 
-    fallback = requests.get(
-        "https://nominatim.openstreetmap.org/search",
-        params={
-            "q": f"{address_number} {address}, {city}, {state}, {country}",
-            "format": "json",
-            "limit": 1,
-        },
-        headers={"User-Agent": "GigGazette/1.0"},
-        timeout=5,
-    )
-    fallback_results = fallback.json()
+    fallback_results = _nominatim_get({
+        "q": f"{address_number} {address}, {city}, {state}, {country}",
+    })
     if fallback_results:
         return float(fallback_results[0]["lat"]), float(fallback_results[0]["lon"])
 
     numeric_number = re.sub(r'[^0-9]', '', address_number)
     if numeric_number != address_number:
-        stripped = requests.get(
-            "https://nominatim.openstreetmap.org/search",
-            params={
-                "q": f"{numeric_number} {address}, {city}, {state}, {country}",
-                "format": "json",
-                "limit": 1,
-            },
-            headers={"User-Agent": "GigGazette/1.0"},
-            timeout=5,
-        )
-        stripped_results = stripped.json()
+        stripped_results = _nominatim_get({
+            "q": f"{numeric_number} {address}, {city}, {state}, {country}",
+        })
         if stripped_results:
             return float(stripped_results[0]["lat"]), float(stripped_results[0]["lon"])
 
