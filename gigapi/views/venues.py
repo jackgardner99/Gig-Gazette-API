@@ -15,25 +15,32 @@ def parse_bool(value, default=False):
     return default
 
 
-def geocode_location(address_number, address, city, state, country="US"):
+def _geoapify_get(params):
     api_key = os.environ.get("GEOAPIFY_API_KEY")
+    response = requests.get(
+        "https://api.geoapify.com/v1/geocode/search",
+        params={**params, "format": "json", "limit": 1, "apiKey": api_key},
+        timeout=10,
+    )
+    response.raise_for_status()
+    return response.json().get("results", [])
+
+
+def geocode_location(address_number, address, city, state, country="US"):
     try:
-        response = requests.get(
-            "https://api.geoapify.com/v1/geocode/search",
-            params={
-                "housenumber": address_number,
-                "street": address,
-                "city": city,
-                "state": state,
-                "country": country,
-                "format": "json",
-                "limit": 1,
-                "apiKey": api_key,
-            },
-            timeout=10,
-        )
-        response.raise_for_status()
-        results = response.json().get("results", [])
+        results = _geoapify_get({
+            "housenumber": address_number,
+            "street": address,
+            "city": city,
+            "state": state,
+            "country": country,
+        })
+        if results:
+            return float(results[0]["lat"]), float(results[0]["lon"])
+
+        results = _geoapify_get({
+            "text": f"{address_number} {address}, {city}, {state}, {country}",
+        })
         if results:
             return float(results[0]["lat"]), float(results[0]["lon"])
     except requests.RequestException:
