@@ -15,34 +15,20 @@ def parse_bool(value, default=False):
     return default
 
 
-def _geoapify_get(params):
-    api_key = os.environ.get("GEOAPIFY_API_KEY")
-    response = requests.get(
-        "https://api.geoapify.com/v1/geocode/search",
-        params={**params, "format": "json", "limit": 1, "apiKey": api_key},
-        timeout=10,
-    )
-    response.raise_for_status()
-    return response.json().get("results", [])
-
-
 def geocode_location(address_number, address, city, state, country="US"):
+    access_token = os.environ.get("MAPBOX_ACCESS_TOKEN")
+    search_text = f"{address_number} {address}, {city}, {state}, {country}"
     try:
-        results = _geoapify_get({
-            "housenumber": address_number,
-            "street": address,
-            "city": city,
-            "state": state,
-            "country": country,
-        })
-        if results:
-            return float(results[0]["lat"]), float(results[0]["lon"])
-
-        results = _geoapify_get({
-            "text": f"{address_number} {address}, {city}, {state}, {country}",
-        })
-        if results:
-            return float(results[0]["lat"]), float(results[0]["lon"])
+        response = requests.get(
+            f"https://api.mapbox.com/geocoding/v5/mapbox.places/{requests.utils.quote(search_text)}.json",
+            params={"access_token": access_token, "limit": 1, "types": "address"},
+            timeout=10,
+        )
+        response.raise_for_status()
+        features = response.json().get("features", [])
+        if features:
+            lon, lat = features[0]["geometry"]["coordinates"]
+            return float(lat), float(lon), None
     except requests.RequestException as e:
         return None, None, str(e)
     return None, None, "no results"
