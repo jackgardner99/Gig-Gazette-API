@@ -43,9 +43,9 @@ def geocode_location(address_number, address, city, state, country="US"):
         })
         if results:
             return float(results[0]["lat"]), float(results[0]["lon"])
-    except requests.RequestException:
-        pass
-    return None, None
+    except requests.RequestException as e:
+        return None, None, str(e)
+    return None, None, "no results"
 
 class RestaurantSerializer(serializers.ModelSerializer):
     class Meta:
@@ -87,9 +87,9 @@ class VenueViewSet(viewsets.ViewSet):
         if not address_number or not address or not city or not state:
             return Response({'error': 'address_number, address, city, and state are required'}, status=status.HTTP_400_BAD_REQUEST)
 
-        lat, lng = geocode_location(address_number, address, city, state, country)
+        lat, lng, geo_error = geocode_location(address_number, address, city, state, country)
         if lat is None or lng is None:
-            return Response({'error': 'Could not resolve address to coordinates'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'error': 'Could not resolve address to coordinates', 'detail': geo_error}, status=status.HTTP_400_BAD_REQUEST)
 
         venue = Venue.objects.create(
             user=request.user,
@@ -136,9 +136,9 @@ class VenueViewSet(viewsets.ViewSet):
             )
 
             if address_changed:
-                lat, lng = geocode_location(address_number, address, city, state, country)
+                lat, lng, geo_error = geocode_location(address_number, address, city, state, country)
                 if lat is None or lng is None:
-                    return Response({'error': 'Could not resolve address to coordinates'}, status=status.HTTP_400_BAD_REQUEST)
+                    return Response({'error': 'Could not resolve address to coordinates', 'detail': geo_error}, status=status.HTTP_400_BAD_REQUEST)
             else:
                 lat, lng = venue.lat, venue.lng
 
