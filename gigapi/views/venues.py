@@ -1,4 +1,4 @@
-import re
+import os
 
 import requests
 from rest_framework import serializers, status, viewsets
@@ -15,44 +15,26 @@ def parse_bool(value, default=False):
     return default
 
 
-NOMINATIM_USER_AGENT = "GigGazette/1.0 (jtgardner99@gmail.com)"
-
-
-def _nominatim_get(params):
+def geocode_location(address_number, address, city, state, country="US"):
+    api_key = os.environ.get("GEOAPIFY_API_KEY")
     response = requests.get(
-        "https://nominatim.openstreetmap.org/search",
-        params={**params, "format": "json", "limit": 1},
-        headers={"User-Agent": NOMINATIM_USER_AGENT},
+        "https://api.geoapify.com/v1/geocode/search",
+        params={
+            "housenumber": address_number,
+            "street": address,
+            "city": city,
+            "state": state,
+            "country": country,
+            "format": "json",
+            "limit": 1,
+            "apiKey": api_key,
+        },
         timeout=10,
     )
     response.raise_for_status()
-    return response.json()
-
-
-def geocode_location(address_number, address, city, state, country="US"):
-    results = _nominatim_get({
-        "street": f"{address_number} {address}",
-        "city": city,
-        "state": state,
-        "country": country,
-    })
+    results = response.json().get("results", [])
     if results:
         return float(results[0]["lat"]), float(results[0]["lon"])
-
-    fallback_results = _nominatim_get({
-        "q": f"{address_number} {address}, {city}, {state}, {country}",
-    })
-    if fallback_results:
-        return float(fallback_results[0]["lat"]), float(fallback_results[0]["lon"])
-
-    numeric_number = re.sub(r'[^0-9]', '', address_number)
-    if numeric_number != address_number:
-        stripped_results = _nominatim_get({
-            "q": f"{numeric_number} {address}, {city}, {state}, {country}",
-        })
-        if stripped_results:
-            return float(stripped_results[0]["lat"]), float(stripped_results[0]["lon"])
-
     return None, None
 
 class RestaurantSerializer(serializers.ModelSerializer):
