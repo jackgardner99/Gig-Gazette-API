@@ -11,6 +11,7 @@ class OpenMic(models.Model):
     end_time = models.TimeField()
     event_image = models.ImageField(upload_to="open_mics/", blank=True, null=True)
     venue = models.ForeignKey(Venue, on_delete=models.CASCADE, related_name="open_mics")
+    description = models.CharField(max_length=5000, blank=True, default='')
 
     class Meta:
         db_table = "open_mics"

@@ -26,6 +26,8 @@ Table Shows {
     date date
     start_time time
     end_time time
+    description varchar
+    venue int [ref: < Venues.id]
 }
 
 Table OpenMics {
@@ -38,6 +40,33 @@ Table OpenMics {
     start_time time
     end_time time
     event_image image
+    description varchar
+    venue int [ref: < Venues.id]
+}
+
+Table WritersRounds {
+    id int pk
+    event_title varchar
+    user_id int [ref: < Users.id]
+    date date
+    start_time time
+    end_time time
+    description varchar
+    venue int [ref: < Venues.id]
+}
+
+Table UserPhotosForOpenMic {
+    id int pk
+    user_id int [ref: < Users.id]
+    openmic_id int [ref: < OpenMics.id]
+    user_image image
+}
+
+Table UserPhotosForWritersRound {
+    id int pk
+    user_id int [ref: < Users.id]
+    writersround_id int [ref: < WritersRounds.id]
+    user_image image
 }
 
 Table Clients {
