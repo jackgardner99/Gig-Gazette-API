@@ -1,2 +1,1 @@
-release: python manage.py migrate
-web: gunicorn gigproject.wsgi --bind 0.0.0.0:$PORT
+web: python manage.py migrate && gunicorn gigproject.wsgi --bind 0.0.0.0:$PORT
