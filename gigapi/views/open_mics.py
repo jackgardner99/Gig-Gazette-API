@@ -17,7 +17,7 @@ class OpenMicSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = OpenMic
-        fields = ['id', 'user', 'event_title', 'recurrence', 'start_time', 'end_time', 'event_image', 'is_owner', 'venue']
+        fields = ['id', 'user', 'event_title', 'recurrence', 'start_time', 'end_time', 'event_image', 'is_owner', 'venue', 'description']
 
 
 class OpenMicViewSet(viewsets.ViewSet):
@@ -52,6 +52,7 @@ class OpenMicViewSet(viewsets.ViewSet):
             start_time=request.data.get('start_time'),
             end_time=request.data.get('end_time'),
             event_image=request.data.get('event_image'),
+            description=request.data.get('description'),
             venue=venue
         )
 
@@ -76,6 +77,7 @@ class OpenMicViewSet(viewsets.ViewSet):
             open_mic.start_time = request.data.get('start_time', open_mic.start_time)
             open_mic.end_time = request.data.get('end_time', open_mic.end_time)
             open_mic.event_image = request.data.get('event_image', open_mic.event_image)
+            open_mic.description = request.data.get('description', open_mic.description)
             open_mic.venue = venue
             open_mic.save()
 

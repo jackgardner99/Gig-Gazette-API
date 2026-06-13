@@ -6,3 +6,4 @@ from .open_mics import OpenMicViewSet
 from .shows import ShowViewSet
 from .users import Users
 from .writers_rounds import WritersRoundViewSet
+from .user_photos import UserPhotoForOpenMicViewSet, UserPhotoForWritersRoundViewSet, UserPhotoForShowViewSet

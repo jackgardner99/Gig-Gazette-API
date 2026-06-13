@@ -13,6 +13,7 @@ class Show(models.Model):
     start_time = models.TimeField()
     end_time = models.TimeField()
     venue = models.ForeignKey(Venue, on_delete=models.CASCADE, related_name="shows")
+    description = models.CharField(max_length=5000, blank=True, default='')
 
     class Meta:
         db_table = "shows"
