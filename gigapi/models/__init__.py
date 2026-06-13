@@ -6,4 +6,4 @@ from .show import Show
 from .open_mic import OpenMic
 from .restaurant import Restaurant
 from .writers_round import WritersRound
-from .user_photos import UserPhotoForOpenMic, UserPhotoForWritersRound
+from .user_photos import UserPhotoForOpenMic, UserPhotoForWritersRound, UserPhotoForShow
