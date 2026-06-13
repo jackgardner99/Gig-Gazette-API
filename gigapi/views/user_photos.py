@@ -45,7 +45,7 @@ class UserPhotoForOpenMicViewSet(viewsets.ViewSet):
         photo = UserPhotoForOpenMic.objects.create(
             user=request.user,
             open_mic=open_mic,
-            user_image=request.data.get('user_image'),
+            user_image=request.FILES.get('user_image'),
         )
 
         serializer = UserPhotoForOpenMicSerializer(photo, context={'request': request})
@@ -90,7 +90,7 @@ class UserPhotoForShowViewSet(viewsets.ViewSet):
         photo = UserPhotoForShow.objects.create(
             user=request.user,
             show=show,
-            user_image=request.data.get('user_image'),
+            user_image=request.FILES.get('user_image'),
         )
 
         serializer = UserPhotoForShowSerializer(photo, context={'request': request})
@@ -135,7 +135,7 @@ class UserPhotoForWritersRoundViewSet(viewsets.ViewSet):
         photo = UserPhotoForWritersRound.objects.create(
             user=request.user,
             writers_round=writers_round,
-            user_image=request.data.get('user_image'),
+            user_image=request.FILES.get('user_image'),
         )
 
         serializer = UserPhotoForWritersRoundSerializer(photo, context={'request': request})
