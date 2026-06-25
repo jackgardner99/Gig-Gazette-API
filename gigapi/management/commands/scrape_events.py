@@ -1,96 +1,130 @@
-import os
-from datetime import datetime
+from datetime import date, timedelta
 
+import recurring_ical_events
 import requests
+from icalendar import Calendar
 from django.core.management.base import BaseCommand
 
-from gigapi.models import Show, Venue
+from gigapi.models import OpenMic, Show, Venue, WritersRound
+
+LOOKAHEAD_DAYS = 60
+
+OPEN_MIC_KEYWORDS = ['open mic', 'open-mic', 'openmic']
+WRITERS_ROUND_KEYWORDS = ['writers round', "writer's round", 'writers’ round', 'writers-round']
+
+
+def _categorize(title):
+    lower = title.lower()
+    if any(k in lower for k in OPEN_MIC_KEYWORDS):
+        return 'open_mic'
+    if any(k in lower for k in WRITERS_ROUND_KEYWORDS):
+        return 'writers_round'
+    return 'show'
 
 
 class Command(BaseCommand):
-    help = 'Scrape upcoming shows from Eventbrite for Nashville venues'
+    help = 'Sync events from venue iCal feeds'
 
     def handle(self, *args, **options):
-        api_key = os.environ.get('EVENTBRITE_API_KEY')
-        if not api_key:
-            self.stderr.write('EVENTBRITE_API_KEY not set')
+        venues = Venue.objects.exclude(ical_feed_url__isnull=True).exclude(ical_feed_url='')
+        if not venues.exists():
+            self.stdout.write('No venues with iCal feeds found')
             return
 
-        headers = {'Authorization': f'Bearer {api_key}'}
         created = 0
         skipped = 0
-        page = 1
 
-        while True:
-            try:
-                response = requests.get(
-                    'https://www.eventbriteapi.com/v3/events/search/',
-                    headers=headers,
-                    params={
-                        'location.address': 'Nashville, TN',
-                        'location.within': '25mi',
-                        'categories': '103',
-                        'expand': 'venue',
-                        'page_size': 50,
-                        'page': page,
-                    },
-                    timeout=10,
-                )
-                response.raise_for_status()
-            except requests.RequestException as e:
-                self.stderr.write(f'Eventbrite request failed: {e}')
-                break
-
-            data = response.json()
-            events = data.get('events', [])
-            if not events:
-                break
-
-            for event in events:
-                result = self._process_event(event)
-                if result == 'created':
-                    created += 1
-                elif result == 'skipped':
-                    skipped += 1
-
-            if not data.get('pagination', {}).get('has_more_items'):
-                break
-            page += 1
+        for venue in venues:
+            c, s = self._sync_venue(venue)
+            created += c
+            skipped += s
 
         self.stdout.write(f'Done: {created} created, {skipped} skipped')
 
-    def _process_event(self, event):
-        eb_venue = event.get('venue')
-        if not eb_venue:
+    def _sync_venue(self, venue):
+        try:
+            response = requests.get(venue.ical_feed_url, timeout=10)
+            response.raise_for_status()
+            cal = Calendar.from_ical(response.content)
+        except Exception as e:
+            self.stderr.write(f'Failed to fetch feed for {venue.name}: {e}')
+            return 0, 0
+
+        start = date.today()
+        end = start + timedelta(days=LOOKAHEAD_DAYS)
+        events = recurring_ical_events.of(cal).between(start, end)
+
+        created = 0
+        skipped = 0
+
+        for event in events:
+            result = self._process_event(event, venue)
+            if result == 'created':
+                created += 1
+            else:
+                skipped += 1
+
+        return created, skipped
+
+    def _process_event(self, event, venue):
+        title = str(event.get('SUMMARY', '')).strip()
+        if not title:
             return 'skipped'
 
-        venue_name = eb_venue.get('name', '').strip()
-        venue = Venue.objects.filter(name__iexact=venue_name).first()
-        if not venue:
+        dtstart = event.get('DTSTART').dt
+        dtend = event.get('DTEND').dt if event.get('DTEND') else None
+
+        if hasattr(dtstart, 'date'):
+            event_date = dtstart.date()
+            start_time = dtstart.time()
+            end_time = dtend.time() if dtend and hasattr(dtend, 'time') else start_time.replace(hour=23, minute=59)
+        else:
+            event_date = dtstart
+            start_time = None
+
+        if not start_time:
             return 'skipped'
 
-        start_str = event.get('start', {}).get('local')
-        end_str = event.get('end', {}).get('local')
-        if not start_str:
-            return 'skipped'
+        description = str(event.get('DESCRIPTION', '')) or ''
+        ticket_link = str(event.get('URL', '')) or ''
+        category = _categorize(title)
 
-        start_dt = datetime.fromisoformat(start_str)
-        end_dt = datetime.fromisoformat(end_str) if end_str else None
+        if category == 'open_mic':
+            if OpenMic.objects.filter(event_title=title, venue=venue, start_time=start_time).exists():
+                return 'skipped'
+            recurrence = str(event.get('RRULE', ''))
+            OpenMic.objects.create(
+                venue=venue,
+                event_title=title,
+                start_time=start_time,
+                end_time=end_time,
+                recurrence=recurrence,
+                description=description,
+            )
 
-        event_title = event.get('name', {}).get('text', '').strip()
-        if not event_title:
-            return 'skipped'
+        elif category == 'writers_round':
+            if WritersRound.objects.filter(event_title=title, venue=venue, date=event_date).exists():
+                return 'skipped'
+            WritersRound.objects.create(
+                venue=venue,
+                event_title=title,
+                date=event_date,
+                start_time=start_time,
+                end_time=end_time,
+                description=description,
+            )
 
-        if Show.objects.filter(event_title=event_title, venue=venue, date=start_dt.date()).exists():
-            return 'skipped'
+        else:
+            if Show.objects.filter(event_title=title, venue=venue, date=event_date).exists():
+                return 'skipped'
+            Show.objects.create(
+                venue=venue,
+                event_title=title,
+                date=event_date,
+                start_time=start_time,
+                end_time=end_time,
+                ticket_link=ticket_link,
+                description=description,
+            )
 
-        Show.objects.create(
-            venue=venue,
-            event_title=event_title,
-            date=start_dt.date(),
-            start_time=start_dt.time(),
-            end_time=end_dt.time() if end_dt else start_dt.replace(hour=23, minute=59).time(),
-            ticket_link=event.get('url', ''),
-            description=event.get('description', {}).get('text', '') or '',
-        )
         return 'created'

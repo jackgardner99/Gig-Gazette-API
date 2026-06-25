@@ -23,6 +23,7 @@ class Venue(models.Model):
     beer_only = models.BooleanField(default=False)
     cover_charge = models.BooleanField(default=False)
     venue_image = models.ImageField(upload_to="venues/", blank=True, null=True)
+    ical_feed_url = models.URLField(blank=True, null=True)
 
     class Meta:
         db_table = "venues"
