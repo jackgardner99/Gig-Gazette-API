@@ -49,7 +49,11 @@ class UserPhotoForOpenMicViewSet(viewsets.ViewSet):
         )
 
         serializer = UserPhotoForOpenMicSerializer(photo, context={'request': request})
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response({
+            **serializer.data,
+            'debug_files': list(request.FILES.keys()),
+            'debug_data': list(request.data.keys()),
+        }, status=status.HTTP_201_CREATED)
 
     def destroy(self, request, pk=None):
         if not request.user.is_authenticated:
