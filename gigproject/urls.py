@@ -23,4 +23,6 @@ urlpatterns = [
     path('', include(router.urls)),
     path('login', csrf_exempt(Users.as_view({'post': 'login_user'}))),
     path('register', csrf_exempt(Users.as_view({'post': 'register'}))),
+    path('password-reset-request', csrf_exempt(Users.as_view({'post': 'request_password_reset'}))),
+    path('password-reset-confirm', csrf_exempt(Users.as_view({'post': 'confirm_password_reset'}))),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
