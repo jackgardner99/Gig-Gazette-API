@@ -4,7 +4,7 @@ from django.urls import include, path
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import routers
 
-from gigapi.views import ArtistViewSet, ClientViewSet, GenreViewSet, OpenMicViewSet, ShowViewSet, Users, VenueViewSet, WritersRoundViewSet, UserPhotoForOpenMicViewSet, UserPhotoForWritersRoundViewSet, UserPhotoForShowViewSet
+from gigapi.views import ArtistViewSet, ClientViewSet, GenreViewSet, OpenMicViewSet, ShowViewSet, Users, VenueViewSet, WritersRoundViewSet, UserPhotoForOpenMicViewSet, UserPhotoForWritersRoundViewSet, UserPhotoForShowViewSet, CalendarImportViewSet
 
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'clients', ClientViewSet, 'client')
@@ -18,6 +18,7 @@ router.register(r'writers_rounds', WritersRoundViewSet, 'writers_round')
 router.register(r'open_mic_photos', UserPhotoForOpenMicViewSet, 'open_mic_photo')
 router.register(r'writers_round_photos', UserPhotoForWritersRoundViewSet, 'writers_round_photo')
 router.register(r'show_photos', UserPhotoForShowViewSet, 'show_photo')
+router.register(r'calendar-import', CalendarImportViewSet, 'calendar_import')
 
 urlpatterns = [
     path('', include(router.urls)),
