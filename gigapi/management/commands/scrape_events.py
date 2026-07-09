@@ -1,4 +1,4 @@
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta
 
 import recurring_ical_events
 import requests
@@ -27,8 +27,9 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         venues = Venue.objects.exclude(ical_feed_url__isnull=True).exclude(ical_feed_url='')
+        self.stdout.write(f'Found {venues.count()} venue(s) with iCal feeds')
         if not venues.exists():
-            self.stdout.write('No venues with iCal feeds found')
+            self.stdout.write('No venues with iCal feeds found — add an ical_feed_url to a venue first')
             return
 
         created = 0
@@ -42,6 +43,7 @@ class Command(BaseCommand):
         self.stdout.write(f'Done: {created} created, {skipped} skipped')
 
     def _sync_venue(self, venue):
+        self.stdout.write(f'Fetching feed for {venue.name}: {venue.ical_feed_url}')
         try:
             response = requests.get(venue.ical_feed_url, timeout=10)
             response.raise_for_status()
@@ -53,6 +55,7 @@ class Command(BaseCommand):
         start = date.today()
         end = start + timedelta(days=LOOKAHEAD_DAYS)
         events = recurring_ical_events.of(cal).between(start, end)
+        self.stdout.write(f'Found {len(events)} event(s) in the next {LOOKAHEAD_DAYS} days')
 
         created = 0
         skipped = 0
@@ -74,16 +77,15 @@ class Command(BaseCommand):
         dtstart = event.get('DTSTART').dt
         dtend = event.get('DTEND').dt if event.get('DTEND') else None
 
-        if hasattr(dtstart, 'date'):
-            event_date = dtstart.date()
-            start_time = dtstart.time()
-            end_time = dtend.time() if dtend and hasattr(dtend, 'time') else start_time.replace(hour=23, minute=59)
-        else:
-            event_date = dtstart
-            start_time = None
-
-        if not start_time:
+        if not isinstance(dtstart, datetime):
             return 'skipped'
+
+        event_date = dtstart.date()
+        start_time = dtstart.time()
+        if dtend and isinstance(dtend, datetime):
+            end_time = dtend.time()
+        else:
+            end_time = start_time.replace(hour=23, minute=59)
 
         description = str(event.get('DESCRIPTION', '')) or ''
         ticket_link = str(event.get('URL', '')) or ''
