@@ -1,4 +1,4 @@
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta
 
 import recurring_ical_events
 import requests
@@ -74,16 +74,15 @@ class Command(BaseCommand):
         dtstart = event.get('DTSTART').dt
         dtend = event.get('DTEND').dt if event.get('DTEND') else None
 
-        if hasattr(dtstart, 'date'):
-            event_date = dtstart.date()
-            start_time = dtstart.time()
-            end_time = dtend.time() if dtend and hasattr(dtend, 'time') else start_time.replace(hour=23, minute=59)
-        else:
-            event_date = dtstart
-            start_time = None
-
-        if not start_time:
+        if not isinstance(dtstart, datetime):
             return 'skipped'
+
+        event_date = dtstart.date()
+        start_time = dtstart.time()
+        if dtend and isinstance(dtend, datetime):
+            end_time = dtend.time()
+        else:
+            end_time = start_time.replace(hour=23, minute=59)
 
         description = str(event.get('DESCRIPTION', '')) or ''
         ticket_link = str(event.get('URL', '')) or ''
