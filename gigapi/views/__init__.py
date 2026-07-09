@@ -7,3 +7,4 @@ from .shows import ShowViewSet
 from .users import Users
 from .writers_rounds import WritersRoundViewSet
 from .user_photos import UserPhotoForOpenMicViewSet, UserPhotoForWritersRoundViewSet, UserPhotoForShowViewSet
+from .calendar_import import CalendarImportViewSet
