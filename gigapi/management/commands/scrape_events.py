@@ -27,8 +27,9 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         venues = Venue.objects.exclude(ical_feed_url__isnull=True).exclude(ical_feed_url='')
+        self.stdout.write(f'Found {venues.count()} venue(s) with iCal feeds')
         if not venues.exists():
-            self.stdout.write('No venues with iCal feeds found')
+            self.stdout.write('No venues with iCal feeds found — add an ical_feed_url to a venue first')
             return
 
         created = 0
@@ -42,6 +43,7 @@ class Command(BaseCommand):
         self.stdout.write(f'Done: {created} created, {skipped} skipped')
 
     def _sync_venue(self, venue):
+        self.stdout.write(f'Fetching feed for {venue.name}: {venue.ical_feed_url}')
         try:
             response = requests.get(venue.ical_feed_url, timeout=10)
             response.raise_for_status()
@@ -53,6 +55,7 @@ class Command(BaseCommand):
         start = date.today()
         end = start + timedelta(days=LOOKAHEAD_DAYS)
         events = recurring_ical_events.of(cal).between(start, end)
+        self.stdout.write(f'Found {len(events)} event(s) in the next {LOOKAHEAD_DAYS} days')
 
         created = 0
         skipped = 0
