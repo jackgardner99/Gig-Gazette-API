@@ -43,7 +43,7 @@ class VenueSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Venue
-        fields = ['id', 'user', 'name', 'address_number', 'address', 'city', 'state', 'country', 'lat', 'lng', 'noise_level', 'parking', 'bar', 'food', 'kid_friendly', 'seating', 'requires_reservation', 'outdoor', 'beer_only', 'cover_charge', 'restaurants', 'venue_image', 'ical_feed_url']
+        fields = ['id', 'user', 'name', 'address_number', 'address', 'city', 'state', 'country', 'lat', 'lng', 'noise_level', 'parking', 'bar', 'food', 'kid_friendly', 'seating', 'requires_reservation', 'outdoor', 'beer_only', 'cover_charge', 'restaurants', 'venue_image', 'ical_feed_url', 'website_url']
 
 class VenueViewSet(viewsets.ViewSet):
 
@@ -99,6 +99,7 @@ class VenueViewSet(viewsets.ViewSet):
             cover_charge=parse_bool(request.data.get('cover_charge', False)),
             venue_image=request.data.get('venue_image'),
             ical_feed_url=request.data.get('ical_feed_url'),
+            website_url=request.data.get('website_url'),
         )
 
         serializer = VenueSerializer(venue)
@@ -149,6 +150,7 @@ class VenueViewSet(viewsets.ViewSet):
             venue.cover_charge = parse_bool(request.data.get('cover_charge', venue.cover_charge))
             venue.venue_image = request.data.get('venue_image', venue.venue_image)
             venue.ical_feed_url = request.data.get('ical_feed_url', venue.ical_feed_url)
+            venue.website_url = request.data.get('website_url', venue.website_url)
             venue.save()
 
             serializer = VenueSerializer(venue)
