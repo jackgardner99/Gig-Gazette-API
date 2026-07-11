@@ -10,7 +10,7 @@ class WritersRoundSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = WritersRound
-        fields = ['id', 'user', 'event_title', 'date', 'start_time', 'end_time', 'venue', 'description']
+        fields = ['id', 'user', 'event_title', 'date', 'start_time', 'end_time', 'venue', 'description', 'website_url']
 
 
 class WritersRoundViewSet(viewsets.ViewSet):
@@ -38,7 +38,8 @@ class WritersRoundViewSet(viewsets.ViewSet):
             date=request.data.get('date'),
             start_time=request.data.get('start_time'),
             end_time=request.data.get('end_time'),
-            description=request.data.get('description')
+            description=request.data.get('description'),
+            website_url=request.data.get('website_url'),
         )
 
         serializer = WritersRoundSerializer(writers_round, context={'request': request})
@@ -73,6 +74,7 @@ class WritersRoundViewSet(viewsets.ViewSet):
             writers_round.start_time = request.data.get('start_time', writers_round.start_time)
             writers_round.end_time = request.data.get('end_time', writers_round.end_time)
             writers_round.description = request.data.get('description', writers_round.description)
+            writers_round.website_url = request.data.get('website_url', writers_round.website_url)
             writers_round.venue = venue
             writers_round.save()
 

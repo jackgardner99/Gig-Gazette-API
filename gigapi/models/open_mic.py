@@ -12,6 +12,7 @@ class OpenMic(models.Model):
     event_image = models.ImageField(upload_to="open_mics/", blank=True, null=True)
     venue = models.ForeignKey(Venue, on_delete=models.CASCADE, related_name="open_mics")
     description = models.CharField(max_length=5000, blank=True, default='')
+    website_url = models.URLField(blank=True, null=True)
 
     class Meta:
         db_table = "open_mics"
