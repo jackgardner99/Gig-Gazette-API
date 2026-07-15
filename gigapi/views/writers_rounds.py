@@ -2,6 +2,7 @@ from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework import serializers
 from gigapi.models import WritersRound
+from gigapi.utils import is_content_flagged
 from .venues import VenueSerializer, Venue
 
 
@@ -10,7 +11,7 @@ class WritersRoundSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = WritersRound
-        fields = ['id', 'user', 'event_title', 'date', 'start_time', 'end_time', 'venue', 'description', 'website_url']
+        fields = ['id', 'user', 'event_title', 'date', 'start_time', 'end_time', 'venue', 'description', 'website_url', 'is_flagged']
 
 
 class WritersRoundViewSet(viewsets.ViewSet):
@@ -40,6 +41,7 @@ class WritersRoundViewSet(viewsets.ViewSet):
             end_time=request.data.get('end_time'),
             description=request.data.get('description'),
             website_url=request.data.get('website_url'),
+            is_flagged=is_content_flagged(f"{request.data.get('event_title', '')} {request.data.get('description', '')}"),
         )
 
         serializer = WritersRoundSerializer(writers_round, context={'request': request})

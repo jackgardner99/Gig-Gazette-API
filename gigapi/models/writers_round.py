@@ -11,6 +11,7 @@ class WritersRound(models.Model):
     venue = models.ForeignKey(Venue, on_delete=models.CASCADE, related_name="writers_rounds")
     description = models.CharField(max_length=5000, blank=True, default='')
     website_url = models.URLField(blank=True, null=True)
+    is_flagged = models.BooleanField(default=False)
 
     class Meta:
         db_table = "writers_rounds"
