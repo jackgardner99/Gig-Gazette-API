@@ -2,6 +2,7 @@ from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework import serializers
 from gigapi.models import OpenMic
+from gigapi.utils import is_content_flagged
 from .venues import Venue, VenueSerializer
 
 
@@ -17,7 +18,7 @@ class OpenMicSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = OpenMic
-        fields = ['id', 'user', 'event_title', 'recurrence', 'start_time', 'end_time', 'event_image', 'is_owner', 'venue', 'description', 'website_url']
+        fields = ['id', 'user', 'event_title', 'recurrence', 'start_time', 'end_time', 'event_image', 'is_owner', 'venue', 'description', 'website_url', 'is_flagged']
 
 
 class OpenMicViewSet(viewsets.ViewSet):
@@ -54,6 +55,7 @@ class OpenMicViewSet(viewsets.ViewSet):
             event_image=request.data.get('event_image'),
             description=request.data.get('description'),
             website_url=request.data.get('website_url'),
+            is_flagged=is_content_flagged(f"{request.data.get('event_title', '')} {request.data.get('description', '')}"),
             venue=venue
         )
 

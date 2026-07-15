@@ -1,6 +1,9 @@
 import html
+import os
 import re
 from datetime import datetime
+
+import requests
 
 from gigapi.models import OpenMic, Show, WritersRound
 
@@ -18,6 +21,23 @@ def categorize_event(title):
     if any(k in lower for k in SHOW_KEYWORDS):
         return 'show'
     return None
+
+
+def is_content_flagged(text):
+    api_key = os.environ.get('OPENAI_API_KEY')
+    if not api_key or not text:
+        return False
+    try:
+        response = requests.post(
+            'https://api.openai.com/v1/moderations',
+            headers={'Authorization': f'Bearer {api_key}', 'Content-Type': 'application/json'},
+            json={'input': text},
+            timeout=5,
+        )
+        response.raise_for_status()
+        return response.json()['results'][0]['flagged']
+    except Exception:
+        return False
 
 
 def process_ical_event(event, venue):
@@ -51,6 +71,7 @@ def process_ical_event(event, venue):
             raw_description = re.sub(re.escape(ticket_link), '', raw_description).strip()
 
     description = raw_description
+    flagged = is_content_flagged(f'{title} {description}')
 
     if category == 'open_mic':
         if OpenMic.objects.filter(event_title=title, venue=venue, start_time=start_time).exists():
@@ -63,6 +84,7 @@ def process_ical_event(event, venue):
             end_time=end_time,
             recurrence=recurrence,
             description=description,
+            is_flagged=flagged,
         )
 
     elif category == 'writers_round':
@@ -75,6 +97,7 @@ def process_ical_event(event, venue):
             start_time=start_time,
             end_time=end_time,
             description=description,
+            is_flagged=flagged,
         )
 
     else:
@@ -88,6 +111,7 @@ def process_ical_event(event, venue):
             end_time=end_time,
             ticket_link=ticket_link,
             description=description,
+            is_flagged=flagged,
         )
 
     return 'created'

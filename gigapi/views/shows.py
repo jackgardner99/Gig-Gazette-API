@@ -2,6 +2,7 @@ from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework import serializers
 from gigapi.models import Show
+from gigapi.utils import is_content_flagged
 from .venues import Venue, VenueSerializer
 
 
@@ -10,7 +11,7 @@ class ShowSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Show
-        fields = ['id', 'user', 'event_title', 'poster_img', 'ticket_link', 'recurrence', 'date', 'start_time', 'end_time', 'venue', 'description', 'website_url']
+        fields = ['id', 'user', 'event_title', 'poster_img', 'ticket_link', 'recurrence', 'date', 'start_time', 'end_time', 'venue', 'description', 'website_url', 'is_flagged']
 
 
 class ShowViewSet(viewsets.ViewSet):
@@ -60,6 +61,7 @@ class ShowViewSet(viewsets.ViewSet):
             end_time=request.data.get('end_time'),
             description=request.data.get('description'),
             website_url=request.data.get('website_url'),
+            is_flagged=is_content_flagged(f"{request.data.get('event_title', '')} {request.data.get('description', '')}"),
         )
 
         serializer = ShowSerializer(show, context={'request': request})
