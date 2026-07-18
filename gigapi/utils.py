@@ -115,3 +115,51 @@ def process_ical_event(event, venue):
         )
 
     return 'created'
+
+
+def scrape_website_for_events(url):
+    import json
+    from bs4 import BeautifulSoup
+
+    try:
+        response = requests.get(url, timeout=10, headers={'User-Agent': 'Mozilla/5.0'})
+        response.raise_for_status()
+    except Exception as e:
+        return None, str(e)
+
+    soup = BeautifulSoup(response.text, 'html.parser')
+    for tag in soup(['script', 'style', 'nav', 'footer', 'header']):
+        tag.decompose()
+    text = ' '.join(soup.get_text(separator=' ').split())[:8000]
+
+    api_key = os.environ.get('OPENAI_API_KEY')
+    if not api_key:
+        return None, 'OPENAI_API_KEY not set'
+
+    prompt = (
+        'Extract all upcoming events from this venue website content. '
+        'Return ONLY a valid JSON array (no markdown, no explanation) where each item has: '
+        '"title" (string), "date" (YYYY-MM-DD or null), "start_time" (HH:MM:SS or null), '
+        '"end_time" (HH:MM:SS or null), "description" (string), "ticket_link" (URL or null), '
+        '"event_type" (one of: "show", "open_mic", "writers_round" — classify based on the event content, default to "show"). '
+        'If no events are found return []. '
+        f'Website content:\n{text}'
+    )
+
+    try:
+        response = requests.post(
+            'https://api.openai.com/v1/chat/completions',
+            headers={'Authorization': f'Bearer {api_key}', 'Content-Type': 'application/json'},
+            json={
+                'model': 'gpt-4o-mini',
+                'messages': [{'role': 'user', 'content': prompt}],
+                'temperature': 0,
+            },
+            timeout=30,
+        )
+        response.raise_for_status()
+        content = response.json()['choices'][0]['message']['content'].strip()
+        events = json.loads(content)
+        return events, None
+    except Exception as e:
+        return None, str(e)

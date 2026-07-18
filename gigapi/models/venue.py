@@ -25,6 +25,7 @@ class Venue(models.Model):
     venue_image = models.ImageField(upload_to="venues/", blank=True, null=True)
     ical_feed_url = models.URLField(blank=True, null=True)
     website_url = models.URLField(blank=True, null=True)
+    scrape_url = models.URLField(blank=True, null=True)
 
     class Meta:
         db_table = "venues"
