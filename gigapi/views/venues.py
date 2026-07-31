@@ -43,7 +43,7 @@ class VenueSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Venue
-        fields = ['id', 'user', 'name', 'address_number', 'address', 'city', 'state', 'country', 'lat', 'lng', 'noise_level', 'parking', 'bar', 'food', 'kid_friendly', 'seating', 'requires_reservation', 'outdoor', 'beer_only', 'cover_charge', 'restaurants', 'venue_image', 'ical_feed_url', 'website_url', 'scrape_url']
+        fields = ['id', 'user', 'name', 'address_number', 'address', 'city', 'state', 'country', 'lat', 'lng', 'noise_level', 'parking', 'bar', 'food', 'kid_friendly', 'seating', 'requires_reservation', 'outdoor', 'beer_only', 'cover_charge', 'restaurants', 'venue_image', 'ical_feed_url', 'website_url']
 
 class VenueViewSet(viewsets.ViewSet):
 
@@ -100,15 +100,20 @@ class VenueViewSet(viewsets.ViewSet):
             venue_image=request.data.get('venue_image'),
             ical_feed_url=request.data.get('ical_feed_url'),
             website_url=request.data.get('website_url'),
-            scrape_url=request.data.get('scrape_url'),
         )
 
         serializer = VenueSerializer(venue)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def update(self, request, pk=None):
+        if not request.user.is_authenticated:
+            return Response({'error': 'Authentication required'}, status=status.HTTP_401_UNAUTHORIZED)
+
         try:
             venue = Venue.objects.get(pk=pk)
+
+            if venue.user != request.user:
+                return Response({'error': 'You do not own this venue'}, status=status.HTTP_403_FORBIDDEN)
 
             address_number = request.data.get('address_number', venue.address_number)
             address = request.data.get('address', venue.address)
@@ -152,7 +157,6 @@ class VenueViewSet(viewsets.ViewSet):
             venue.venue_image = request.data.get('venue_image', venue.venue_image)
             venue.ical_feed_url = request.data.get('ical_feed_url', venue.ical_feed_url)
             venue.website_url = request.data.get('website_url', venue.website_url)
-            venue.scrape_url = request.data.get('scrape_url', venue.scrape_url)
             venue.save()
 
             serializer = VenueSerializer(venue)
