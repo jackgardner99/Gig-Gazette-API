@@ -106,8 +106,14 @@ class VenueViewSet(viewsets.ViewSet):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def update(self, request, pk=None):
+        if not request.user.is_authenticated:
+            return Response({'error': 'Authentication required'}, status=status.HTTP_401_UNAUTHORIZED)
+
         try:
             venue = Venue.objects.get(pk=pk)
+
+            if venue.user != request.user:
+                return Response({'error': 'You do not own this venue'}, status=status.HTTP_403_FORBIDDEN)
 
             address_number = request.data.get('address_number', venue.address_number)
             address = request.data.get('address', venue.address)
